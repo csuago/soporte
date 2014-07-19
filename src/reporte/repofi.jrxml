@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repofi" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="Dfecha" class="java.util.Date" isForPrompting="false">
+		<property name="net.sf.jasperreports.text.truncate.at.char" value=""/>
+		<parameterDescription><![CDATA[Fecha Remitente]]></parameterDescription>
+	</parameter>
+	<parameter name="Vusuario" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="Plogo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="Vgrupo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="Hfecha" class="java.util.Date" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT
+     correpo.`nro_oficio` AS correpo_nro_oficio,
+     correpo.`des_rem` AS correpo_des_rem,
+     correpo.`fecha_rec` AS correpo_fecha_rec,
+     correpo.`cod_rem` AS correpo_cod_rem,
+     remite.`cod_rem` AS remite_cod_rem,
+     remite.`den_rem` AS remite_den_rem
+FROM
+     `correpo` correpo
+INNER JOIN remite
+ON correpo.cod_rem = remite.cod_rem
+WHERE correpo.edo_reg = 'A'
+  and correpo.grupo   = $P{Vgrupo}
+  and correpo.fecha_rec BETWEEN $P{Dfecha} and $P{Hfecha}]]>
+	</queryString>
+	<field name="correpo_nro_oficio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="correpo_des_rem" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="correpo_fecha_rec" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="correpo_cod_rem" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="remite_cod_rem" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="remite_den_rem" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53" splitType="Stretch">
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="11" y="5" width="114" height="43"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{Plogo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="211" y="16" width="171" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion por Oficio]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="3" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="2" width="569" height="22" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="4" width="38" height="20" forecolor="#000000"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Oficio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="3" width="60" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Rec.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="3" width="100" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remitente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="4" width="164" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion del Documento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="3" y="3" width="43" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{correpo_nro_oficio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="2" width="197" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{remite_den_rem}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="33" y="2" width="58" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{correpo_fecha_rec}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="277" y="2" width="294" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{correpo_des_rem}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="49" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy     h.mm a" isBlankWhenNull="true">
+				<reportElement x="4" y="4" width="135" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="4" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="519" y="4" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="26" width="207" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Vusuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
