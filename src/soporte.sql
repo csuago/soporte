@@ -1,405 +1,413 @@
-/*
-Navicat MySQL Data Transfer
+CREATE DATABASE  IF NOT EXISTS `soporte` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `soporte`;
+-- MySQL dump 10.13  Distrib 5.5.38, for debian-linux-gnu (i686)
+--
+-- Host: 127.0.0.1    Database: soporte
+-- ------------------------------------------------------
+-- Server version	5.5.38-0ubuntu0.14.04.1
 
-Source Server         : local
-Source Server Version : 50090
-Source Host           : localhost:3306
-Source Database       : soporte
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-Target Server Type    : MYSQL
-Target Server Version : 50090
-File Encoding         : 65001
+--
+-- Table structure for table `admg01`
+--
 
-Date: 2014-04-08 10:25:21
-*/
-
-CREATE DATABASE soporte;
-USE soporte;
-SET FOREIGN_KEY_CHECKS=0;
--- ----------------------------
--- Table structure for `admg01`
--- ----------------------------
 DROP TABLE IF EXISTS `admg01`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admg01` (
-  `id` smallint(7) NOT NULL auto_increment,
-  `edo_reg` char(1) default NULL,
-  `cod_cia` char(2) default NULL,
-  `den_cia` varchar(50) default NULL,
-  `slo_cia` varchar(30) default NULL,
-  `ciu_cia` varchar(20) default NULL,
-  `pai_cia` varchar(20) default NULL,
-  `edo_cia` varchar(20) default NULL,
-  `dir_cia` varchar(60) default NULL,
-  `rif_cia` varchar(20) default NULL,
-  `nit_cia` varchar(20) default NULL,
-  `par_cia` varchar(20) default NULL,
-  `tlf_cia` varchar(20) default NULL,
-  `fec_reg` datetime default '0000-00-00 00:00:00',
-  `logo` varchar(50) default NULL,
+  `id` smallint(7) NOT NULL AUTO_INCREMENT,
+  `edo_reg` char(1) DEFAULT NULL,
+  `cod_cia` char(2) DEFAULT NULL,
+  `den_cia` varchar(50) DEFAULT NULL,
+  `slo_cia` varchar(30) DEFAULT NULL,
+  `ciu_cia` varchar(20) DEFAULT NULL,
+  `pai_cia` varchar(20) DEFAULT NULL,
+  `edo_cia` varchar(20) DEFAULT NULL,
+  `dir_cia` varchar(60) DEFAULT NULL,
+  `rif_cia` varchar(20) DEFAULT NULL,
+  `nit_cia` varchar(20) DEFAULT NULL,
+  `par_cia` varchar(20) DEFAULT NULL,
+  `tlf_cia` varchar(20) DEFAULT NULL,
+  `fec_reg` datetime DEFAULT '0000-00-00 00:00:00',
+  `logo` varchar(50) DEFAULT NULL,
   UNIQUE KEY `Ind01` (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of admg01
--- ----------------------------
-INSERT INTO `admg01` VALUES ('1', 'A', '16', 'HOSPITAL GENERAL DEL SUR', 'H.G.S', 'MARACAIBO', 'VENEZUELA', 'ZULIA', 'KM 1 VIA PERIJA', '', '', 'CRISTO DE ARANZA', '', '2010-05-13 16:49:47', './imagenes/logohgs.jpg');
+--
+-- Dumping data for table `admg01`
+--
 
--- ----------------------------
--- Table structure for `admg02`
--- ----------------------------
+LOCK TABLES `admg01` WRITE;
+/*!40000 ALTER TABLE `admg01` DISABLE KEYS */;
+INSERT INTO `admg01` VALUES (1,'A','16','HOSPITAL GENERAL DEL SUR','H.G.S','MARACAIBO','VENEZUELA','ZULIA','KM 1 VIA PERIJA','','','CRISTO DE ARANZA','','2010-05-13 16:49:47','./imagenes/logohgs.jpg');
+/*!40000 ALTER TABLE `admg01` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admg02`
+--
+
 DROP TABLE IF EXISTS `admg02`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admg02` (
-  `edo_reg` char(1) default NULL,
-  `cod_usr` varchar(15) default NULL,
-  `psw_usr` varchar(16) default NULL,
-  `den_usr` varchar(40) default NULL,
-  `cod_cia` char(2) default NULL,
-  `cod_serv` char(3) default NULL,
-  `edo_usu` char(1) default NULL,
-  `cla_usr` char(2) default NULL,
-  `telef` varchar(15) default NULL,
-  `direc` varchar(50) default NULL,
-  `plataforma` varchar(4) default NULL,
-  `cedula` char(10) default NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `edo_reg` char(1) DEFAULT NULL,
+  `cod_usr` varchar(15) DEFAULT NULL,
+  `psw_usr` varchar(16) DEFAULT NULL,
+  `den_usr` varchar(40) NOT NULL,
+  `cod_cia` char(2) DEFAULT NULL,
+  `cod_serv` char(3) DEFAULT NULL,
+  `edo_usu` char(1) DEFAULT NULL,
+  `telef_area` varchar(4) NOT NULL DEFAULT '000',
+  `telef` varchar(15) NOT NULL,
+  `direc` varchar(50) DEFAULT NULL,
+  `plataforma` varchar(4) DEFAULT NULL,
+  `cedula` char(10) NOT NULL,
+  `id_perfil` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `den_usr_UNIQUE` (`den_usr`),
+  UNIQUE KEY `cedula_UNIQUE` (`cedula`),
   KEY `ind01` (`cod_usr`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of admg02
--- ----------------------------
-INSERT INTO `admg02` VALUES ('A', 'MARIALIS', 'cgqmygsmjv', 'MARIALIS MAVAREZ', '16', null, 'A', 'SU', '7292422', 'URB LA POMONA BLOQ. 9 APTO C-5', 'JAVA', '20149468');
-INSERT INTO `admg02` VALUES ('A', 'ELIMAR', 'tcqxngnw', 'ELIMAR MEDINA', '16', null, 'A', 'UM', '', '', 'JAVA', '13723807');
-INSERT INTO `admg02` VALUES ('A', 'JESUS', '17396?>:', 'JESUS MORA', '16', null, 'A', 'UM', '', '', 'jAVA', null);
-INSERT INTO `admg02` VALUES ('A', 'ALIRIO', '2:386??8', 'ALIRIO JIMENEZ', '16', null, 'A', 'UM', '', '', 'JAVA', null);
+--
+-- Dumping data for table `admg02`
+--
 
--- ----------------------------
--- Table structure for `admg03`
--- ----------------------------
+LOCK TABLES `admg02` WRITE;
+/*!40000 ALTER TABLE `admg02` DISABLE KEYS */;
+INSERT INTO `admg02` VALUES (1,'A','MARIALIS','cgqmygsmjv','MARIALIS MAVAREZ','16',NULL,'A','261','7292422','URB LA POMONA BLOQ. 9 APTO C-5','JAVA','20149468',0),(2,'A','ELIMAR','tcqxngnw','ELIMAR MEDINA','16',NULL,'A','000','0000000','','JAVA','13723807',1),(3,'A','JESUS','17396?>:','JESUS MORA','16',NULL,'A','000','0000000','','jAVA','v00000000',0),(4,'A','ALIRIO','17396?>:','ALIRIO JIMENEZ','16',NULL,'A','000','0000000','','JAVA','v00000002',0),(5,'A','JOSE','123','JOSE',NULL,NULL,'B','000','5121556','','JAVA','v24567894',13),(6,'A','PEDRO','1234','PEDRO',NULL,NULL,'B','000','1231231','GSHJGSJGHJ','JAVA','v21215561',4),(7,'A','JOSE','456','JOSE CANSECO',NULL,NULL,'B','123','1234567','ASDASDASDASD','JAVA','v58985855',13);
+/*!40000 ALTER TABLE `admg02` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admg03`
+--
+
 DROP TABLE IF EXISTS `admg03`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admg03` (
-  `edo_reg` char(1) default '0',
-  `cod_usr` varchar(15) default NULL,
-  `cod_prg` varchar(10) default NULL,
-  `cod_cia` char(2) default NULL,
-  `ind_rap` char(1) default NULL,
-  `opi` int(1) NOT NULL default '0',
-  `opm` int(1) NOT NULL default '0',
-  `ope` int(1) NOT NULL default '0',
-  `plataforma` varchar(4) default NULL
+  `edo_reg` char(1) DEFAULT '0',
+  `cod_usr` varchar(15) DEFAULT NULL,
+  `cod_prg` varchar(10) DEFAULT NULL,
+  `cod_cia` char(2) DEFAULT NULL,
+  `ind_rap` char(1) DEFAULT NULL,
+  `opi` int(1) NOT NULL DEFAULT '0',
+  `opm` int(1) NOT NULL DEFAULT '0',
+  `ope` int(1) NOT NULL DEFAULT '0',
+  `plataforma` varchar(4) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of admg03
--- ----------------------------
-INSERT INTO `admg03` VALUES ('A', 'ELIMAR', 'FSOPORTE', null, 'T', '1', '1', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ELIMAR', 'SERVICIOS', null, 'T', '1', '1', '1', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ELIMAR', 'INVENTARIO', null, 'T', '1', '1', '1', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ELIMAR', 'BIENES', null, 'T', '1', '1', '1', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ELIMAR', 'FEMPRESA', null, 'T', '1', '1', '1', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ELIMAR', 'AUSUARIO', null, 'T', '1', '1', '1', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ELIMAR', 'REPORTE', null, 'T', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'MARIALIS', 'INVENTARIO', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'MARIALIS', 'FEMPRESA', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'MARIALIS', 'SERVICIOS', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'MARIALIS', 'REPORTE', null, 'T', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'MARIALIS', 'FSOPORTE', null, 'T', '1', '1', '1', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'MARIALIS', 'AUSUARIO', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ELIMAR', 'EQUIPOS', null, 'T', '1', '1', '1', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'MARIALIS', 'EQUIPOS', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'JESUS', 'AUSUARIO', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'JESUS', 'EQUIPOS', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'JESUS', 'BIENES', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'JESUS', 'INVENTARIO', null, 'F', '1', '1', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'JESUS', 'FEMPRESA', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'JESUS', 'FSOPORTE', null, 'T', '1', '1', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'JESUS', 'REPORTE', null, 'T', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'JESUS', 'SERVICIOS', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ALIRIO', 'AUSUARIO', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ALIRIO', 'EQUIPOS', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ALIRIO', 'BIENES', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ALIRIO', 'INVENTARIO', null, 'F', '1', '1', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ALIRIO', 'FEMPRESA', null, 'F', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ALIRIO', 'FSOPORTE', null, 'T', '1', '1', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ALIRIO', 'REPORTE', null, 'T', '0', '0', '0', 'JAVA');
-INSERT INTO `admg03` VALUES ('A', 'ALIRIO', 'SERVICIOS', null, 'F', '0', '0', '0', 'JAVA');
+--
+-- Dumping data for table `admg03`
+--
 
--- ----------------------------
--- Table structure for `admg05`
--- ----------------------------
+LOCK TABLES `admg03` WRITE;
+/*!40000 ALTER TABLE `admg03` DISABLE KEYS */;
+INSERT INTO `admg03` VALUES ('A','ELIMAR','FSOPORTE',NULL,'T',1,1,0,'JAVA'),('A','ELIMAR','SERVICIOS',NULL,'T',1,1,1,'JAVA'),('A','ELIMAR','INVENTARIO',NULL,'T',1,1,1,'JAVA'),('A','ELIMAR','BIENES',NULL,'T',1,1,1,'JAVA'),('A','ELIMAR','FEMPRESA',NULL,'T',1,1,1,'JAVA'),('A','ELIMAR','AUSUARIO',NULL,'T',1,1,1,'JAVA'),('A','ELIMAR','REPORTE',NULL,'T',0,0,0,'JAVA'),('A','MARIALIS','INVENTARIO',NULL,'F',0,0,0,'JAVA'),('A','MARIALIS','FEMPRESA',NULL,'F',0,0,0,'JAVA'),('A','MARIALIS','SERVICIOS',NULL,'F',0,0,0,'JAVA'),('A','MARIALIS','REPORTE',NULL,'T',0,0,0,'JAVA'),('A','MARIALIS','FSOPORTE',NULL,'T',1,1,1,'JAVA'),('A','MARIALIS','AUSUARIO',NULL,'F',0,0,0,'JAVA'),('A','ELIMAR','EQUIPOS',NULL,'T',1,1,1,'JAVA'),('A','MARIALIS','EQUIPOS',NULL,'F',0,0,0,'JAVA'),('A','JESUS','AUSUARIO',NULL,'F',0,0,0,'JAVA'),('A','JESUS','EQUIPOS',NULL,'F',0,0,0,'JAVA'),('A','JESUS','BIENES',NULL,'F',0,0,0,'JAVA'),('A','JESUS','INVENTARIO',NULL,'F',1,1,0,'JAVA'),('A','JESUS','FEMPRESA',NULL,'F',0,0,0,'JAVA'),('A','JESUS','FSOPORTE',NULL,'T',1,1,0,'JAVA'),('A','JESUS','REPORTE',NULL,'T',0,0,0,'JAVA'),('A','JESUS','SERVICIOS',NULL,'F',0,0,0,'JAVA'),('A','ALIRIO','AUSUARIO',NULL,'F',0,0,0,'JAVA'),('A','ALIRIO','EQUIPOS',NULL,'F',0,0,0,'JAVA'),('A','ALIRIO','BIENES',NULL,'F',0,0,0,'JAVA'),('A','ALIRIO','INVENTARIO',NULL,'F',1,1,0,'JAVA'),('A','ALIRIO','FEMPRESA',NULL,'F',0,0,0,'JAVA'),('A','ALIRIO','FSOPORTE',NULL,'T',1,1,0,'JAVA'),('A','ALIRIO','REPORTE',NULL,'T',0,0,0,'JAVA'),('A','ALIRIO','SERVICIOS',NULL,'F',0,0,0,'JAVA');
+/*!40000 ALTER TABLE `admg03` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admg05`
+--
+
 DROP TABLE IF EXISTS `admg05`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admg05` (
-  `edo_reg` char(1) default '0',
-  `cla_usr` char(2) default NULL,
-  `den_cla` varchar(40) default NULL
+  `edo_reg` char(1) DEFAULT '0',
+  `cla_usr` char(2) DEFAULT NULL,
+  `den_cla` varchar(40) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of admg05
--- ----------------------------
-INSERT INTO `admg05` VALUES ('A', 'SU', 'Supervisor');
-INSERT INTO `admg05` VALUES ('A', 'UM', 'Usuario');
-INSERT INTO `admg05` VALUES ('A', 'UP', 'Programador');
-INSERT INTO `admg05` VALUES ('A', 'CO', 'Usuario de Consulta');
-INSERT INTO `admg05` VALUES ('A', 'PA', 'Usuario de Pasantia');
-INSERT INTO `admg05` VALUES ('A', 'SU', 'Supervisor');
-INSERT INTO `admg05` VALUES ('A', 'UM', 'Usuario');
-INSERT INTO `admg05` VALUES ('A', 'UP', 'Programador');
+--
+-- Dumping data for table `admg05`
+--
 
--- ----------------------------
--- Table structure for `bienes`
--- ----------------------------
+LOCK TABLES `admg05` WRITE;
+/*!40000 ALTER TABLE `admg05` DISABLE KEYS */;
+INSERT INTO `admg05` VALUES ('A','SU','Supervisor'),('A','UM','Usuario'),('A','UP','Programador'),('A','CO','Usuario de Consulta'),('A','PA','Usuario de Pasantia'),('A','SU','Supervisor'),('A','UM','Usuario'),('A','UP','Programador');
+/*!40000 ALTER TABLE `admg05` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bienes`
+--
+
 DROP TABLE IF EXISTS `bienes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bienes` (
-  `oid` smallint(9) NOT NULL auto_increment,
-  `edo_reg` char(1) default NULL,
-  `fecharec` date default '0000-00-00',
-  `codserv` char(3) default NULL,
-  `codbien` char(3) default NULL,
-  `numbien` varchar(10) default NULL,
-  `subgrupo` int(2) default NULL,
-  `seccion` int(3) default NULL,
-  `cantidad` int(3) default '0',
-  `descripcion` varchar(200) default NULL,
-  `valorunit` double(8,2) default NULL,
-  `valortotal` double(8,2) default NULL,
-  `desbien` varchar(10) default NULL,
-  `status` char(1) default NULL,
-  PRIMARY KEY  (`oid`),
+  `oid` smallint(9) NOT NULL AUTO_INCREMENT,
+  `edo_reg` char(1) DEFAULT NULL,
+  `fecharec` date DEFAULT '0000-00-00',
+  `codserv` char(3) DEFAULT NULL,
+  `codbien` char(3) DEFAULT NULL,
+  `numbien` varchar(10) DEFAULT NULL,
+  `subgrupo` int(2) DEFAULT NULL,
+  `seccion` int(3) DEFAULT NULL,
+  `cantidad` int(3) DEFAULT '0',
+  `descripcion` varchar(200) DEFAULT NULL,
+  `valorunit` double(8,2) DEFAULT NULL,
+  `valortotal` double(8,2) DEFAULT NULL,
+  `desbien` varchar(10) DEFAULT NULL,
+  `status` char(1) DEFAULT NULL,
+  PRIMARY KEY (`oid`),
   KEY `Ind01` (`codserv`),
   KEY `Ind02` (`numbien`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of bienes
--- ----------------------------
+--
+-- Dumping data for table `bienes`
+--
 
--- ----------------------------
--- Table structure for `equipos`
--- ----------------------------
+LOCK TABLES `bienes` WRITE;
+/*!40000 ALTER TABLE `bienes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bienes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `equipos`
+--
+
 DROP TABLE IF EXISTS `equipos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `equipos` (
-  `oid` mediumint(9) NOT NULL auto_increment,
-  `edo_reg` char(1) default NULL,
-  `cod_serv` char(3) default NULL,
-  `fechareg` date default '0001-01-01',
-  `dominio` varchar(20) default NULL,
-  `grupo` varchar(20) default NULL,
-  `nom_equi` varchar(20) default NULL,
-  PRIMARY KEY  (`oid`)
+  `oid` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `edo_reg` char(1) DEFAULT NULL,
+  `cod_serv` char(3) DEFAULT NULL,
+  `fechareg` date DEFAULT '0001-01-01',
+  `dominio` varchar(20) DEFAULT NULL,
+  `grupo` varchar(20) DEFAULT NULL,
+  `nom_equi` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of equipos
--- ----------------------------
-INSERT INTO `equipos` VALUES ('1', 'A', '004', '2012-06-19', 'SMBSERVER02', 'OTIC', 'INFORMATICA01');
+--
+-- Dumping data for table `equipos`
+--
 
--- ----------------------------
--- Table structure for `insl04`
--- ----------------------------
+LOCK TABLES `equipos` WRITE;
+/*!40000 ALTER TABLE `equipos` DISABLE KEYS */;
+INSERT INTO `equipos` VALUES (1,'A','004','2012-06-19','SMBSERVER02','OTIC','INFORMATICA01');
+/*!40000 ALTER TABLE `equipos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `insl04`
+--
+
 DROP TABLE IF EXISTS `insl04`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `insl04` (
-  `edo_reg` char(1) default NULL,
-  `cod_prg` varchar(10) default NULL,
-  `nom_prg` varchar(40) default NULL,
-  `ind_rap` char(1) default NULL,
-  `opi` int(1) default NULL,
-  `opm` int(1) default NULL,
-  `ope` int(1) default NULL,
-  `fec_ins` datetime NOT NULL default '0000-00-00 00:00:00'
+  `edo_reg` char(1) DEFAULT NULL,
+  `cod_prg` varchar(10) DEFAULT NULL,
+  `nom_prg` varchar(40) DEFAULT NULL,
+  `ind_rap` char(1) DEFAULT NULL,
+  `opi` int(1) DEFAULT NULL,
+  `opm` int(1) DEFAULT NULL,
+  `ope` int(1) DEFAULT NULL,
+  `fec_ins` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of insl04
--- ----------------------------
-INSERT INTO `insl04` VALUES ('A', 'AUSUARIO', 'Administración de usuarios', 'F', '0', '0', '0', '2009-10-10 04:07:00');
-INSERT INTO `insl04` VALUES ('A', 'FEMPRESA', 'Registro de Instituciónes', 'F', '0', '0', '0', '2009-10-10 04:07:00');
-INSERT INTO `insl04` VALUES ('A', 'REPORTE', 'Reporte del Sistema', 'F', '0', '0', '0', '2009-10-10 04:07:00');
-INSERT INTO `insl04` VALUES ('A', 'FSOPORTE', 'Registro de Soporte', 'F', '1', '1', '0', '2011-06-07 11:50:00');
-INSERT INTO `insl04` VALUES ('A', 'BIENES', 'Registro de Bienes', 'F', '0', '0', '0', '2011-08-04 09:53:21');
-INSERT INTO `insl04` VALUES ('A', 'SERVICIOS', 'Servicios', 'F', '0', '0', '0', '2009-10-10 04:07:00');
-INSERT INTO `insl04` VALUES ('A', 'INVENTARIO', 'Registro de Equipo', 'F', '0', '0', '0', '2011-08-03 10:52:53');
-INSERT INTO `insl04` VALUES ('A', 'EQUIPOS', 'Equipos de Red', 'F', '0', '0', '0', '2012-06-19 09:52:42');
+--
+-- Dumping data for table `insl04`
+--
 
--- ----------------------------
--- Table structure for `inventario`
--- ----------------------------
+LOCK TABLES `insl04` WRITE;
+/*!40000 ALTER TABLE `insl04` DISABLE KEYS */;
+INSERT INTO `insl04` VALUES ('A','AUSUARIO','Administración de usuarios','F',0,0,0,'2009-10-10 04:07:00'),('A','FEMPRESA','Registro de Instituciónes','F',0,0,0,'2009-10-10 04:07:00'),('A','REPORTE','Reporte del Sistema','F',0,0,0,'2009-10-10 04:07:00'),('A','FSOPORTE','Registro de Soporte','F',1,1,0,'2011-06-07 11:50:00'),('A','BIENES','Registro de Bienes','F',0,0,0,'2011-08-04 09:53:21'),('A','SERVICIOS','Servicios','F',0,0,0,'2009-10-10 04:07:00'),('A','INVENTARIO','Registro de Equipo','F',0,0,0,'2011-08-03 10:52:53'),('A','EQUIPOS','Equipos de Red','F',0,0,0,'2012-06-19 09:52:42');
+/*!40000 ALTER TABLE `insl04` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `inventario`
+--
+
 DROP TABLE IF EXISTS `inventario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `inventario` (
-  `oid` smallint(9) NOT NULL auto_increment,
-  `edo_reg` char(1) default NULL,
-  `fecharec` date default '0000-00-00',
-  `codserv` char(3) default NULL,
-  `codbien` char(3) default NULL,
-  `numbien` varchar(10) default NULL,
-  `impresora` varchar(100) default NULL,
-  `tarjetamadre` varchar(40) default NULL,
-  `disco` varchar(40) default NULL,
-  `memoria` varchar(40) default NULL,
-  `procesador` varchar(40) default NULL,
-  `dvdcd` varchar(40) default NULL,
-  `teclado` varchar(40) default NULL,
-  `mouse` varchar(40) default NULL,
-  `corneta` varchar(40) default NULL,
-  `monitor` varchar(40) default NULL,
-  `regulador` varchar(40) default NULL,
-  `sistema` varchar(40) default NULL,
-  PRIMARY KEY  (`oid`),
+  `oid` smallint(9) NOT NULL AUTO_INCREMENT,
+  `edo_reg` char(1) DEFAULT NULL,
+  `fecharec` date DEFAULT '0000-00-00',
+  `codserv` char(3) DEFAULT NULL,
+  `codbien` char(3) DEFAULT NULL,
+  `numbien` varchar(10) DEFAULT NULL,
+  `impresora` varchar(100) DEFAULT NULL,
+  `tarjetamadre` varchar(40) DEFAULT NULL,
+  `disco` varchar(40) DEFAULT NULL,
+  `memoria` varchar(40) DEFAULT NULL,
+  `procesador` varchar(40) DEFAULT NULL,
+  `dvdcd` varchar(40) DEFAULT NULL,
+  `teclado` varchar(40) DEFAULT NULL,
+  `mouse` varchar(40) DEFAULT NULL,
+  `corneta` varchar(40) DEFAULT NULL,
+  `monitor` varchar(40) DEFAULT NULL,
+  `regulador` varchar(40) DEFAULT NULL,
+  `sistema` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`oid`),
   KEY `ind01` (`numbien`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of inventario
--- ----------------------------
+--
+-- Dumping data for table `inventario`
+--
 
--- ----------------------------
--- Table structure for `repolist`
--- ----------------------------
+LOCK TABLES `inventario` WRITE;
+/*!40000 ALTER TABLE `inventario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inventario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `perfil`
+--
+
+DROP TABLE IF EXISTS `perfil`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `perfil` (
+  `id_perfil` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `permission` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_perfil`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `perfil`
+--
+
+LOCK TABLES `perfil` WRITE;
+/*!40000 ALTER TABLE `perfil` DISABLE KEYS */;
+INSERT INTO `perfil` VALUES (0,'default',32),(1,'admin',63),(13,'usuario',39),(4,'invitados',36);
+/*!40000 ALTER TABLE `perfil` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `repolist`
+--
+
 DROP TABLE IF EXISTS `repolist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `repolist` (
-  `edo_reg` char(1) default NULL,
-  `codigo` varchar(8) default NULL,
-  `descrip` varchar(60) default NULL,
-  `status` varchar(4) default NULL
+  `edo_reg` char(1) DEFAULT NULL,
+  `codigo` varchar(8) DEFAULT NULL,
+  `descrip` varchar(60) DEFAULT NULL,
+  `status` varchar(4) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of repolist
--- ----------------------------
-INSERT INTO `repolist` VALUES ('A', 'LISTMES', 'Listado mensual por usuario de soporte', '');
-INSERT INTO `repolist` VALUES ('A', 'REPOMES', 'Estadistica por mes', null);
+--
+-- Dumping data for table `repolist`
+--
 
--- ----------------------------
--- Table structure for `servicios`
--- ----------------------------
+LOCK TABLES `repolist` WRITE;
+/*!40000 ALTER TABLE `repolist` DISABLE KEYS */;
+INSERT INTO `repolist` VALUES ('A','LISTMES','Listado mensual por usuario de soporte',''),('A','REPOMES','Estadistica por mes',NULL);
+/*!40000 ALTER TABLE `repolist` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `servicios`
+--
+
 DROP TABLE IF EXISTS `servicios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `servicios` (
-  `cod_serv` char(3) default NULL,
-  `cod_cia` char(2) default NULL,
-  `den_serv` varchar(60) default NULL,
-  `edo_reg` char(1) default NULL,
-  `oid` mediumint(9) unsigned zerofill NOT NULL auto_increment,
-  PRIMARY KEY  (`oid`),
+  `oid` mediumint(9) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `cod_serv` char(3) NOT NULL,
+  `den_serv` varchar(60) NOT NULL,
+  `cod_cia` char(2) DEFAULT NULL,
+  `edo_reg` char(1) DEFAULT 'A',
+  PRIMARY KEY (`oid`),
+  UNIQUE KEY `cod_serv_UNIQUE` (`cod_serv`),
+  UNIQUE KEY `den_serv_UNIQUE` (`den_serv`),
   KEY `Ind01` (`cod_serv`)
-) ENGINE=MyISAM AUTO_INCREMENT=158 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=159 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of servicios
--- ----------------------------
-INSERT INTO `servicios` VALUES ('000', '16', 'UNIDAD DE GESTION', 'A', '000000002');
-INSERT INTO `servicios` VALUES ('002', '16', 'ADMINISTRACION', 'A', '000000139');
-INSERT INTO `servicios` VALUES ('003', '16', 'GERENCIA RRHH', 'A', '000000140');
-INSERT INTO `servicios` VALUES ('004', '16', 'INFORMATICA', 'A', '000000006');
-INSERT INTO `servicios` VALUES ('007', '16', 'KARDEX', 'A', '000000008');
-INSERT INTO `servicios` VALUES ('009', '16', 'BIENES Y MATERIA', 'A', '000000009');
-INSERT INTO `servicios` VALUES ('010', '16', 'CAJA', 'A', '000000010');
-INSERT INTO `servicios` VALUES ('013', '16', 'FARMACIA', 'A', '000000011');
-INSERT INTO `servicios` VALUES ('014', '16', 'REGISTRO Y ESTADISTICA DE SALUD', 'A', '000000012');
-INSERT INTO `servicios` VALUES ('015', '16', 'LABORATORIO GENERAL', 'A', '000000013');
-INSERT INTO `servicios` VALUES ('016', '16', 'LABORATORIO EMERGENCIA', 'A', '000000014');
-INSERT INTO `servicios` VALUES ('017', '16', 'ENFERMERIA', 'A', '000000015');
-INSERT INTO `servicios` VALUES ('018', '16', 'FISIATRIA', 'A', '000000016');
-INSERT INTO `servicios` VALUES ('019', '16', 'EPIDEMIOLOGIA', 'A', '000000017');
-INSERT INTO `servicios` VALUES ('020', '16', 'CARDIOLOGIA', 'A', '000000018');
-INSERT INTO `servicios` VALUES ('021', '16', 'OFTALMOLOGIA', 'A', '000000019');
-INSERT INTO `servicios` VALUES ('022', '16', 'EMERGENCIA DE ADULTO', 'A', '000000020');
-INSERT INTO `servicios` VALUES ('023', '16', 'EMERGENCIA DE NIÑO', 'A', '000000021');
-INSERT INTO `servicios` VALUES ('024', '16', 'NUTRICION Y DIETETICA', 'A', '000000022');
-INSERT INTO `servicios` VALUES ('025', '16', 'BANCO DE SANGRE', 'A', '000000023');
-INSERT INTO `servicios` VALUES ('026', '16', 'CIRUGIA DE TORAX', 'A', '000000024');
-INSERT INTO `servicios` VALUES ('027', '16', 'COORDINACION MEDICINA FAMILIAR', 'A', '000000025');
-INSERT INTO `servicios` VALUES ('028', '16', 'TISIOLOGIA', 'A', '000000026');
-INSERT INTO `servicios` VALUES ('029', '16', 'ANATOMIA PATOLOGICA', 'A', '000000027');
-INSERT INTO `servicios` VALUES ('030', '16', 'IMAGENES RX', 'A', '000000028');
-INSERT INTO `servicios` VALUES ('032', '16', 'TELEVISION EDUCATIVA', 'A', '000000029');
-INSERT INTO `servicios` VALUES ('033', '16', 'SUMINISTRO', 'A', '000000030');
-INSERT INTO `servicios` VALUES ('036', '16', 'INMUNOLOGIA', 'A', '000000032');
-INSERT INTO `servicios` VALUES ('037', '16', 'CENTRAL DE CITAS', 'A', '000000033');
-INSERT INTO `servicios` VALUES ('038', '16', 'ADMISION DE EMERGENCIA', 'A', '000000034');
-INSERT INTO `servicios` VALUES ('039', '16', 'BIBLIOTECA', 'A', '000000035');
-INSERT INTO `servicios` VALUES ('040', '16', 'ODONTOLOGIA', 'A', '000000036');
-INSERT INTO `servicios` VALUES ('041', '16', 'SANEAMIENTO AMBIENTAR', 'A', '000000037');
-INSERT INTO `servicios` VALUES ('042', '16', 'PABELLON', 'A', '000000038');
-INSERT INTO `servicios` VALUES ('043', '16', 'NEUMONOLOGIA', 'A', '000000039');
-INSERT INTO `servicios` VALUES ('044', '16', 'MEDICINA INTERNA', 'A', '000000040');
-INSERT INTO `servicios` VALUES ('045', '16', 'DERMATOLOGIA', 'A', '000000041');
-INSERT INTO `servicios` VALUES ('046', '16', 'UROLOGIA', 'A', '000000042');
-INSERT INTO `servicios` VALUES ('047', '16', 'CIRUGIA PLASTICA', 'A', '000000043');
-INSERT INTO `servicios` VALUES ('048', '16', 'SERVICIO SOCIAL', 'A', '000000044');
-INSERT INTO `servicios` VALUES ('049', '16', 'TRAUMATOLOGIA', 'A', '000000045');
-INSERT INTO `servicios` VALUES ('050', '16', 'PEDIATRIA', 'A', '000000046');
-INSERT INTO `servicios` VALUES ('051', '16', 'GASTROENTEROLOGIA', 'A', '000000047');
-INSERT INTO `servicios` VALUES ('052', '16', 'CIRUGIA GENERAL', 'A', '000000048');
-INSERT INTO `servicios` VALUES ('054', '16', 'NEFROLOGIA - CONSULTA', 'A', '000000049');
-INSERT INTO `servicios` VALUES ('055', '16', 'VENEREOLOGIA', 'A', '000000050');
-INSERT INTO `servicios` VALUES ('056', '16', 'PSIQUIATRIA', 'A', '000000051');
-INSERT INTO `servicios` VALUES ('057', '16', 'GINECOLOGIA', 'A', '000000052');
-INSERT INTO `servicios` VALUES ('058', '16', 'O.R.L.', 'A', '000000053');
-INSERT INTO `servicios` VALUES ('059', '16', 'TRANSPORTE Y VIGILANCIA', 'A', '000000054');
-INSERT INTO `servicios` VALUES ('060', '16', 'MANTENIMIENTO', 'A', '000000055');
-INSERT INTO `servicios` VALUES ('062', '16', 'AREA AMBULATORIA (CONSULTA)', 'A', '000000056');
-INSERT INTO `servicios` VALUES ('063', '16', 'NEFROLOGIA HOSP - PISO 2', 'A', '000000057');
-INSERT INTO `servicios` VALUES ('064', '16', 'UNIDAD HEMODIALISIS - PISO 3', 'A', '000000058');
-INSERT INTO `servicios` VALUES ('065', '16', 'PEDIATRIA HOSP. - PISO 4', 'A', '000000059');
-INSERT INTO `servicios` VALUES ('066', '16', 'PEDIATRIA HOSP. - PISO 5', 'A', '000000060');
-INSERT INTO `servicios` VALUES ('067', '16', 'TRAUMATOLOGIA HOSP. - PISO 6', 'A', '000000061');
-INSERT INTO `servicios` VALUES ('068', '16', 'CIRUGIA HOSP. - PISO 7', 'A', '000000062');
-INSERT INTO `servicios` VALUES ('070', '16', 'MEDICINA INTERNA HOSP. - PISO 9', 'A', '000000063');
-INSERT INTO `servicios` VALUES ('071', '16', 'MEDICINA INTERNA HOSP. - PISO 10', 'A', '000000064');
-INSERT INTO `servicios` VALUES ('072', '16', 'M-4', 'A', '000000065');
-INSERT INTO `servicios` VALUES ('073', '16', 'NEUMOTISIOLOGIA HOSP. - H-4', 'A', '000000066');
-INSERT INTO `servicios` VALUES ('074', '16', 'U.C.R. - UNIDAD DE CUIDADOS RESPIRATORIOS', 'A', '000000067');
-INSERT INTO `servicios` VALUES ('075', '16', 'U.C.I. - UNIDAD DE CUIDADOS INTENSIVOS', 'A', '000000068');
-INSERT INTO `servicios` VALUES ('076', '16', 'LAVANDERIA Y COSTURA', 'A', '000000069');
-INSERT INTO `servicios` VALUES ('079', '16', 'INZUDIABETES', 'A', '000000070');
-INSERT INTO `servicios` VALUES ('080', '16', 'ERGOMETRIA', 'A', '000000071');
-INSERT INTO `servicios` VALUES ('082', '16', 'ASMA Y EFICEMA - I.R.A. - P.A.N.A.', 'A', '000000072');
-INSERT INTO `servicios` VALUES ('083', '16', 'ULTRASONIDO', 'A', '000000073');
-INSERT INTO `servicios` VALUES ('086', '16', 'NEUROLOGIA', 'A', '000000074');
-INSERT INTO `servicios` VALUES ('092', '16', 'MEDICINA GENERAL', 'A', '000000075');
-INSERT INTO `servicios` VALUES ('095', '16', 'NEUROCIRUGIA', 'A', '000000076');
-INSERT INTO `servicios` VALUES ('096', '16', 'EXPLORACION PULMONAR', 'A', '000000077');
-INSERT INTO `servicios` VALUES ('097', '16', 'EXPLORACION FUNCIONAL', 'A', '000000078');
-INSERT INTO `servicios` VALUES ('098', '16', 'CIRUGIA CARDIOVASCULAR', 'A', '000000079');
-INSERT INTO `servicios` VALUES ('099', '16', 'GERIATRIA', 'A', '000000080');
-INSERT INTO `servicios` VALUES ('069', '16', 'BRONCOSCOPIA - PISO 3', 'A', '000000110');
-INSERT INTO `servicios` VALUES ('008', '16', 'ANESTESIOLOGIA', 'A', '000000114');
-INSERT INTO `servicios` VALUES ('001', '16', 'DIRECCION', 'A', '000000141');
-INSERT INTO `servicios` VALUES ('100', '16', 'ASESORIA JURIDICA', 'A', '000000143');
-INSERT INTO `servicios` VALUES ('101', '16', 'ECOGRAFIA', 'A', '000000144');
-INSERT INTO `servicios` VALUES ('011', '16', 'AVANCE', 'A', '000000145');
-INSERT INTO `servicios` VALUES ('006', '16', 'CONTABILIDAD', 'A', '000000146');
-INSERT INTO `servicios` VALUES ('005', '16', 'COMPRA', 'A', '000000147');
-INSERT INTO `servicios` VALUES ('012', '16', 'SEGURIDAD Y TRANSPORTE', 'A', '000000148');
-INSERT INTO `servicios` VALUES ('102', '16', 'SEGUIMIENTO Y CONTROL', 'A', '000000149');
-INSERT INTO `servicios` VALUES ('031', '16', 'ECOGRAMA DE EMERGENCIA', 'A', '000000150');
-INSERT INTO `servicios` VALUES ('034', '16', 'RELACIONES PUBLICAS', 'A', '000000151');
-INSERT INTO `servicios` VALUES ('077', '16', 'PROGRAMA DE DIABETES', 'A', '000000152');
-INSERT INTO `servicios` VALUES ('084', '16', 'ALMACEN', 'A', '000000155');
-INSERT INTO `servicios` VALUES ('078', '16', 'ESCUELA PARA PADRE', 'A', '000000154');
-INSERT INTO `servicios` VALUES ('053', '16', 'COORDINACION DE ENFERMERIA REGIONAL', 'A', '000000156');
-INSERT INTO `servicios` VALUES ('103', '16', 'ELIMAR', 'D', '000000157');
+--
+-- Dumping data for table `servicios`
+--
 
--- ----------------------------
--- Table structure for `soporte`
--- ----------------------------
+LOCK TABLES `servicios` WRITE;
+/*!40000 ALTER TABLE `servicios` DISABLE KEYS */;
+INSERT INTO `servicios` VALUES (000000002,'000','UNIDAD DE GESTION','16','A'),(000000139,'002','ADMINISTRACION','16','A'),(000000140,'003','GERENCIA RRHH','16','A'),(000000006,'004','INFORMATICA','16','A'),(000000008,'007','KARDEX','16','A'),(000000009,'009','BIENES Y MATERIA','16','A'),(000000010,'010','CAJA','16','A'),(000000011,'013','FARMACIA','16','A'),(000000012,'014','REGISTRO Y ESTADISTICA DE SALUD','16','A'),(000000013,'015','LABORATORIO GENERAL','16','A'),(000000014,'016','LABORATORIO EMERGENCIA','16','A'),(000000015,'017','ENFERMERIA','16','A'),(000000016,'018','FISIATRIA','16','A'),(000000017,'019','EPIDEMIOLOGIA','16','A'),(000000018,'020','CARDIOLOGIA','16','A'),(000000019,'021','OFTALMOLOGIA','16','A'),(000000020,'022','EMERGENCIA DE ADULTO','16','A'),(000000021,'023','EMERGENCIA DE NIÑO','16','A'),(000000022,'024','NUTRICION Y DIETETICA','16','A'),(000000023,'025','BANCO DE SANGRE','16','A'),(000000024,'026','CIRUGIA DE TORAX','16','A'),(000000025,'027','COORDINACION MEDICINA FAMILIAR','16','A'),(000000026,'028','TISIOLOGIA','16','A'),(000000027,'029','ANATOMIA PATOLOGICA','16','A'),(000000028,'030','IMAGENES RX','16','A'),(000000029,'032','TELEVISION EDUCATIVA','16','A'),(000000030,'033','SUMINISTRO','16','A'),(000000032,'036','INMUNOLOGIA','16','A'),(000000033,'037','CENTRAL DE CITAS','16','A'),(000000034,'038','ADMISION DE EMERGENCIA','16','A'),(000000035,'039','BIBLIOTECA','16','A'),(000000036,'040','ODONTOLOGIA','16','A'),(000000037,'041','SANEAMIENTO AMBIENTAR','16','A'),(000000038,'042','PABELLON','16','A'),(000000039,'043','NEUMONOLOGIA','16','A'),(000000040,'044','MEDICINA INTERNA','16','A'),(000000041,'045','DERMATOLOGIA','16','A'),(000000042,'046','UROLOGIA','16','A'),(000000043,'047','CIRUGIA PLASTICA','16','A'),(000000044,'048','SERVICIO SOCIAL','16','A'),(000000045,'049','TRAUMATOLOGIA','16','A'),(000000046,'050','PEDIATRIA','16','A'),(000000047,'051','GASTROENTEROLOGIA','16','A'),(000000048,'052','CIRUGIA GENERAL','16','A'),(000000049,'054','NEFROLOGIA - CONSULTA','16','A'),(000000050,'055','VENEREOLOGIA','16','A'),(000000051,'056','PSIQUIATRIA','16','A'),(000000052,'057','GINECOLOGIA','16','A'),(000000053,'058','O.R.L.','16','A'),(000000054,'059','TRANSPORTE Y VIGILANCIA','16','A'),(000000055,'060','MANTENIMIENTO','16','A'),(000000056,'062','AREA AMBULATORIA (CONSULTA)','16','A'),(000000057,'063','NEFROLOGIA HOSP - PISO 2','16','A'),(000000058,'064','UNIDAD HEMODIALISIS - PISO 3','16','A'),(000000059,'065','PEDIATRIA HOSP. - PISO 4','16','A'),(000000060,'066','PEDIATRIA HOSP. - PISO 5','16','A'),(000000061,'067','TRAUMATOLOGIA HOSP. - PISO 6','16','A'),(000000062,'068','CIRUGIA HOSP. - PISO 7','16','A'),(000000063,'070','MEDICINA INTERNA HOSP. - PISO 9','16','A'),(000000064,'071','MEDICINA INTERNA HOSP. - PISO 10','16','A'),(000000065,'072','M-4','16','A'),(000000066,'073','NEUMOTISIOLOGIA HOSP. - H-4','16','A'),(000000067,'074','U.C.R. - UNIDAD DE CUIDADOS RESPIRATORIOS','16','A'),(000000068,'075','U.C.I. - UNIDAD DE CUIDADOS INTENSIVOS','16','A'),(000000069,'076','LAVANDERIA Y COSTURA','16','A'),(000000070,'079','INZUDIABETES','16','A'),(000000071,'080','ERGOMETRIA','16','A'),(000000072,'082','ASMA Y EFICEMA - I.R.A. - P.A.N.A.','16','A'),(000000073,'083','ULTRASONIDO','16','A'),(000000074,'086','NEUROLOGIA','16','A'),(000000075,'092','MEDICINA GENERAL','16','A'),(000000076,'095','NEUROCIRUGIA','16','A'),(000000077,'096','EXPLORACION PULMONAR','16','A'),(000000078,'097','EXPLORACION FUNCIONAL','16','A'),(000000079,'098','CIRUGIA CARDIOVASCULAR','16','A'),(000000080,'099','GERIATRIA','16','A'),(000000110,'069','BRONCOSCOPIA - PISO 3','16','A'),(000000114,'008','ANESTESIOLOGIA','16','A'),(000000141,'001','DIRECCION','16','A'),(000000143,'100','ASESORIA JURIDICA','16','A'),(000000144,'101','ECOGRAFIA','16','A'),(000000145,'011','AVANCE','16','A'),(000000146,'006','CONTABILIDAD','16','A'),(000000147,'005','COMPRA','16','A'),(000000148,'012','SEGURIDAD Y TRANSPORTE','16','A'),(000000149,'102','SEGUIMIENTO Y CONTROL','16','A'),(000000150,'031','ECOGRAMA DE EMERGENCIA','16','A'),(000000151,'034','RELACIONES PUBLICAS','16','A'),(000000152,'077','PROGRAMA DE DIABETES','16','A'),(000000155,'084','ALMACEN','16','A'),(000000154,'078','ESCUELA PARA PADRE','16','A'),(000000156,'053','COORDINACION DE ENFERMERIA REGIONAL','16','A'),(000000157,'103','ELIMAR','16','D'),(000000158,'104','SEGUIMIENTO Y CONTROL 2','16','D');
+/*!40000 ALTER TABLE `servicios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `soporte`
+--
+
 DROP TABLE IF EXISTS `soporte`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `soporte` (
-  `oid` mediumint(9) NOT NULL auto_increment,
-  `edo_reg` char(1) default NULL,
-  `fecharec` date default '0000-00-00',
-  `fechasal` date default '0000-00-00',
-  `noment` varchar(30) default NULL,
-  `nomrec` varchar(30) default NULL,
-  `codserv` char(3) default NULL,
-  `codbien` char(3) default NULL,
-  `numbien` varchar(10) default NULL,
+  `oid` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `edo_reg` char(1) DEFAULT NULL,
+  `fecharec` date DEFAULT '0000-00-00',
+  `fechasal` date DEFAULT '0000-00-00',
+  `noment` varchar(30) DEFAULT NULL,
+  `nomrec` varchar(30) DEFAULT NULL,
+  `codserv` char(3) DEFAULT NULL,
+  `codbien` char(3) DEFAULT NULL,
+  `numbien` varchar(10) DEFAULT NULL,
   `desequipo` text,
   `dessoporte` text,
-  `cedula` char(10) default NULL,
-  `tiempo` datetime default NULL,
-  PRIMARY KEY  (`oid`)
-) ENGINE=MyISAM AUTO_INCREMENT=163 DEFAULT CHARSET=utf8;
+  `cedula` char(10) DEFAULT NULL,
+  `tiempo` datetime DEFAULT NULL,
+  `reparacion` bit(1) DEFAULT b'0',
+  `instalacion` bit(1) DEFAULT b'0',
+  `cerrado` bit(1) DEFAULT b'0',
+  PRIMARY KEY (`oid`)
+) ENGINE=MyISAM AUTO_INCREMENT=167 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of soporte
--- ----------------------------
+--
+-- Dumping data for table `soporte`
+--
+
+LOCK TABLES `soporte` WRITE;
+/*!40000 ALTER TABLE `soporte` DISABLE KEYS */;
+INSERT INTO `soporte` VALUES (163,'A','2014-07-19','2014-07-19','JOSE','','084','BN','','SDFSDFSDFSDF','','13723807','2014-07-19 06:34:18','\0','\0','\0'),(164,'A','2014-07-19','2014-07-19','FGDFG','','','BN','dfgdfg','FDGFDG','','13723807','2014-07-19 06:59:33','\0','\0','\0'),(165,'A','2008-07-19','2014-07-19','DSFSDF','DSFSDFSDF','038','BE','sdfsdf','SDFSDF','','13723807','2014-07-19 07:53:12','\0','\0','\0'),(166,'A','2000-07-19','2014-07-19','DGDFG','','038','BN','dfgdfg','FDGDFGDFG','DFGDFGDFGDFG','13723807','2014-07-19 07:54:59','\0','\0','\0');
+/*!40000 ALTER TABLE `soporte` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-07-22  0:31:17
