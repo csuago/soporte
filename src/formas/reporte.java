@@ -211,12 +211,16 @@ public class reporte extends javax.swing.JFrame {
         Map paremeters = null;
         switch (tabla.getSelectedRow()) {
             case 0:
+                
                 break;
             case 1:
+                
                 break;
             case 2:
+                
                 break;
             case 3:
+                
                 break;
             case 4:
                 paremeters = new HashMap();
