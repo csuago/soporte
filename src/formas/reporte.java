@@ -15,17 +15,28 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 
@@ -45,52 +56,51 @@ public class reporte extends javax.swing.JFrame {
        JPanel contenido = new JPanel();
        this.setContentPane(contenido);
        try{
-             cone = new MiConexionBD()      ;
-             cone.init();
-             Connection conn =(Connection) cone.getMiConexion();
-             stmt=conn.createStatement();
-             File f = new File("./imagenes/fondoimpre.jpg" );
-             BufferedImage tmpImagen = ImageIO.read( f );
+//             cone = cone.getInstance();
+             //cone.init();
+             //Connection conn = (Connection) MiConexionBD.getMiConexion();
+//             stmt = cone.getSql();
+             BufferedImage tmpImagen = ImageIO.read( getClass().getResource("/imagenes/fondoimpre.jpg" ));
              BgBorder fondo = new BgBorder( tmpImagen );
              contenido.setBorder(fondo);
           }
 
        catch(Exception e)
-          {}
+          {e.printStackTrace();}
             initComponents();
             setIconImage (new ImageIcon("./imagenes/ibraico.png").getImage());
             setLocationRelativeTo(null);
-            cargar_busqueda() ;           
+//            cargar_busqueda() ;           
     }
 
  
-    private void cargar_busqueda()
-    {
-       DefaultTableModel tr = (DefaultTableModel)tabla.getModel();
-         
-       try
-         {
-               Statement s = (Statement) cone.getMiConexion().createStatement();
-               String consul="select codigo,descrip from repolist where edo_reg='A'";
-               ResultSet rs = s.executeQuery(consul);
-
-                while (rs.next())
-                    {
-                      String var1 = rs.getString("codigo");
-                      String var2 = rs.getString("descrip");                    
-                      tr.addRow(new Object[]{var1, var2,});
-                      tabla.setModel(tr);
-                      TableColumn column = null;
-                      for (int i = 0; i < 1; i++) {
-                        column = tabla.getColumnModel().getColumn(i);
-                        if (i == 0) {column.setPreferredWidth(0);}
-                        if (i == 1) {column.setPreferredWidth(150);}                       
-                       }
-                    }
-         }
-             catch (Exception e)
-         { }
-   }
+//    private void cargar_busqueda()
+//    {
+//       DefaultTableModel tr = (DefaultTableModel)tabla.getModel();
+//         
+//       try
+//         {
+//               Statement s = (Statement) cone.getMiConexion().createStatement();
+//               String consul="select codigo,descrip from repolist where edo_reg='A'";
+//               ResultSet rs = s.executeQuery(consul);
+//
+//                while (rs.next())
+//                    {
+//                      String var1 = rs.getString("codigo");
+//                      String var2 = rs.getString("descrip");                    
+//                      tr.addRow(new Object[]{var1, var2,});
+//                      tabla.setModel(tr);
+//                      TableColumn column = null;
+//                      for (int i = 0; i < 1; i++) {
+//                        column = tabla.getColumnModel().getColumn(i);
+//                        if (i == 0) {column.setPreferredWidth(0);}
+//                        if (i == 1) {column.setPreferredWidth(150);}                       
+//                       }
+//                    }
+//         }
+//             catch (Exception e)
+//         { }
+//   }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -105,7 +115,7 @@ public class reporte extends javax.swing.JFrame {
         btonrepo = new javax.swing.JButton();
         Btonsalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Listado de Soporte Tecnico");
         setIconImage(getIconImage());
         setResizable(false);
@@ -115,7 +125,11 @@ public class reporte extends javax.swing.JFrame {
         tabla.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, "Informe mensual general"},
+                {null, "Informe mensual por usuario"},
+                {null, "Informe de equipos pendientes"},
+                {null, "Informe de equipos reparados"},
+                {null, "Informe de equipos"}
             },
             new String [] {
                 "CODIGO", "DESCRIPCION"
@@ -133,16 +147,18 @@ public class reporte extends javax.swing.JFrame {
         tabla.getTableHeader().setResizingAllowed(false);
         tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabla);
-        tabla.getColumnModel().getColumn(0).setMinWidth(0);
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(0);
-        tabla.getColumnModel().getColumn(0).setMaxWidth(0);
-        tabla.getColumnModel().getColumn(1).setResizable(false);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(150);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setMinWidth(0);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tabla.getColumnModel().getColumn(0).setMaxWidth(0);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(150);
+        }
 
-        btonrepo.setFont(new java.awt.Font("Tahoma", 1, 12));
+        btonrepo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btonrepo.setForeground(new java.awt.Color(0, 0, 102));
         btonrepo.setText("Mostrar Reporte");
-        btonrepo.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btonrepo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btonrepo.setContentAreaFilled(false);
         btonrepo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,10 +166,10 @@ public class reporte extends javax.swing.JFrame {
             }
         });
 
-        Btonsalir.setFont(new java.awt.Font("Tahoma", 1, 14));
+        Btonsalir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Btonsalir.setForeground(new java.awt.Color(0, 0, 102));
         Btonsalir.setText("Salir");
-        Btonsalir.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        Btonsalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Btonsalir.setContentAreaFilled(false);
         Btonsalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Btonsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -192,55 +208,32 @@ public class reporte extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btonrepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonrepoActionPerformed
-    try {           
-            int fila = tabla.getSelectedRow();
-            if (fila < 0) {
+        Map paremeters = null;
+        switch (tabla.getSelectedRow()) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                paremeters = new HashMap();
+                paremeters.put("logo", getClass().getResourceAsStream("/imagenes/logohgs.jpg"));
+                print(getClass().getResource("/reporte/ListadoEquipos.jasper"), paremeters);
+                break;
+            default:
                 JOptionPane.showMessageDialog(this, "  Elija una fila de Lista ", "A T E N C I O N", JOptionPane.PLAIN_MESSAGE);
-            } else {
-                String mfila=(tabla.getValueAt(fila,0).toString().toLowerCase());
-//                fileName="/Proyejava/correos/src/reporte/"+mfila+".jasper";
-                fileName="./reporte/"+mfila+".jasper";
-              
-              if(mfila.compareTo("listmes") ==0){
-//                 Mostrar(); 
-                  String p_cod_hosp = JOptionPane.showInputDialog("CEDULA :");
-                  String p_mes = JOptionPane.showInputDialog("MES :");
-                  String p_ano = JOptionPane.showInputDialog("AÑO :");
-
-                  Map parameters =new HashMap();
-                  parameters.put("pcedula", p_cod_hosp);
-                  parameters.put("pmes", p_mes);
-                  parameters.put("pyear", p_ano);
-
-                  JasperPrint jasperPrint = JasperFillManager.fillReport(fileName, parameters, cone.getMiConexion());
-                  JasperViewer leap = new JasperViewer(jasperPrint, false);
-                  leap.setTitle("Lista de Reportes");
-                  leap.setVisible(true);
-              }                            
-             if(mfila.compareTo("repomes") ==0){                 
-//                 Mostrar();
-                  String p_mes = JOptionPane.showInputDialog("MES :");
-                  String p_ano = JOptionPane.showInputDialog("AÑO :");                 
-                 
-                  Map parameters =new HashMap();
-                  parameters.put("pmes", p_mes);
-                  parameters.put("pyear", p_ano);
-
-                  JasperPrint jasperPrint = JasperFillManager.fillReport(fileName, parameters, cone.getMiConexion());
-                  JasperViewer leap = new JasperViewer(jasperPrint, false);
-                  leap.setTitle("Lista de Reportes");
-                  leap.setVisible(true);
-              }
-             
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Ocurrio un error: "+e.getMessage());
         }
-
+            
+             
+            
+       
 }//GEN-LAST:event_btonrepoActionPerformed
     
     private void BtonsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtonsalirActionPerformed
-        setVisible(false);
+        this.dispose();
 }//GEN-LAST:event_BtonsalirActionPerformed
 /**
  * @param args the command line arguments
@@ -259,5 +252,14 @@ public class reporte extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
-
+    
+    private void print(URL fileName, Map parameters) {
+        try {
+            JasperReport report = (JasperReport) JRLoader.loadObject(fileName);
+            JasperPrint print = JasperFillManager.fillReport(report, parameters, MiConexionBD.MiConexion);
+            JasperViewer.viewReport(print, false);
+        } catch (JRException ex) {
+            Logger.getLogger(reporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
