@@ -260,7 +260,7 @@ public class reporte extends javax.swing.JFrame {
     private void print(URL fileName, Map parameters) {
         try {
             JasperReport report = (JasperReport) JRLoader.loadObject(fileName);
-            JasperPrint print = JasperFillManager.fillReport(report, parameters, MiConexionBD.MiConexion);
+            JasperPrint print = JasperFillManager.fillReport(report, parameters, MiConexionBD.getMiConexion());
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
             Logger.getLogger(reporte.class.getName()).log(Level.SEVERE, null, ex);

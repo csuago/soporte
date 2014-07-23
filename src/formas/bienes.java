@@ -54,7 +54,9 @@ public class bienes extends javax.swing.JFrame {
            initComponents();
            setIconImage (new ImageIcon("./imagenes/ibraico.png").getImage());
            setLocationRelativeTo(null);
+           Cfecharec.getDateEditor().setEnabled(false);
            Cfecharec.requestFocus();
+           Cfecharec.setMinSelectableDate(new Date());
            JTableHeader cabeceraTabla1 = Tabla1.getTableHeader();
            cabeceraTabla1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
            cabeceraTabla1.setBackground(new java.awt.Color(0, 102, 153));
