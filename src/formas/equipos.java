@@ -113,7 +113,7 @@ public class equipos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla3 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("REGISTRO DE BIENES");
         setBackground(new java.awt.Color(0, 102, 153));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -125,7 +125,7 @@ public class equipos extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
         jPanel1.setLayout(null);
 
-        btonincluir.setFont(new java.awt.Font("Tahoma", 1, 12));
+        btonincluir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btonincluir.setForeground(new java.awt.Color(0, 0, 102));
         btonincluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/incluir.png"))); // NOI18N
         btonincluir.setText("Incluir");
@@ -140,7 +140,7 @@ public class equipos extends javax.swing.JFrame {
         jPanel1.add(btonincluir);
         btonincluir.setBounds(10, 10, 120, 30);
 
-        btoneliminar.setFont(new java.awt.Font("Tahoma", 1, 12));
+        btoneliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btoneliminar.setForeground(new java.awt.Color(0, 0, 102));
         btoneliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Eliminar.png"))); // NOI18N
         btoneliminar.setText("Borrar");
@@ -157,7 +157,7 @@ public class equipos extends javax.swing.JFrame {
         jPanel1.add(btoneliminar);
         btoneliminar.setBounds(10, 50, 120, 30);
 
-        btonmodificar.setFont(new java.awt.Font("Tahoma", 1, 12));
+        btonmodificar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btonmodificar.setForeground(new java.awt.Color(0, 0, 102));
         btonmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/editar.png"))); // NOI18N
         btonmodificar.setText("Modificar");
@@ -173,7 +173,7 @@ public class equipos extends javax.swing.JFrame {
         jPanel1.add(btonmodificar);
         btonmodificar.setBounds(10, 90, 120, 30);
 
-        btoncancelar.setFont(new java.awt.Font("Tahoma", 1, 12));
+        btoncancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btoncancelar.setForeground(new java.awt.Color(0, 51, 102));
         btoncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/redo.png"))); // NOI18N
         btoncancelar.setText("Cancelar");
@@ -188,7 +188,7 @@ public class equipos extends javax.swing.JFrame {
         jPanel1.add(btoncancelar);
         btoncancelar.setBounds(10, 130, 120, 30);
 
-        btonaceptar.setFont(new java.awt.Font("Tahoma", 1, 12));
+        btonaceptar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btonaceptar.setForeground(new java.awt.Color(0, 0, 102));
         btonaceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aceptar.png"))); // NOI18N
         btonaceptar.setText("Guardar");
@@ -207,7 +207,7 @@ public class equipos extends javax.swing.JFrame {
         jPanel1.add(btonaceptar);
         btonaceptar.setBounds(10, 170, 120, 30);
 
-        btonsalir.setFont(new java.awt.Font("Tahoma", 1, 12));
+        btonsalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btonsalir.setForeground(new java.awt.Color(0, 0, 102));
         btonsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
         btonsalir.setText("Salida");
@@ -223,7 +223,7 @@ public class equipos extends javax.swing.JFrame {
         jPanel1.add(btonsalir);
         btonsalir.setBounds(10, 210, 120, 30);
 
-        aviso.setFont(new java.awt.Font("Arial", 1, 12));
+        aviso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         aviso.setForeground(new java.awt.Color(0, 0, 153));
         aviso.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         aviso.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -233,42 +233,42 @@ public class equipos extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 102, 153));
         jPanel2.setLayout(null);
 
-        Ficha.setFont(new java.awt.Font("Arial", 1, 12));
+        Ficha.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel3.setFont(new java.awt.Font("Arial", 1, 12));
+        jPanel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jPanel3.setLayout(null);
 
-        Codigo.setFont(new java.awt.Font("Tahoma", 1, 12));
+        Codigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Codigo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Codigo.setText("Codigo");
         jPanel3.add(Codigo);
-        Codigo.setBounds(10, 12, 43, 15);
+        Codigo.setBounds(10, 12, 49, 15);
 
-        fechareg.setFont(new java.awt.Font("Arial", 1, 12));
+        fechareg.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         fechareg.setText("Fecha_Rec");
         jPanel3.add(fechareg);
         fechareg.setBounds(188, 12, 70, 15);
 
-        servicio.setFont(new java.awt.Font("Tahoma", 1, 12));
+        servicio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         servicio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         servicio.setText("Servicio");
         jPanel3.add(servicio);
-        servicio.setBounds(10, 40, 47, 15);
+        servicio.setBounds(10, 40, 55, 15);
 
-        Bien.setFont(new java.awt.Font("Tahoma", 1, 12));
+        Bien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Bien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Bien.setText("Dominio");
         jPanel3.add(Bien);
         Bien.setBounds(10, 70, 60, 15);
 
-        Seccion.setFont(new java.awt.Font("Tahoma", 1, 12));
+        Seccion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Seccion.setText("Nombre Equipo");
         jPanel3.add(Seccion);
         Seccion.setBounds(10, 133, 100, 15);
 
-        subgrupos.setFont(new java.awt.Font("Tahoma", 1, 12));
+        subgrupos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         subgrupos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         subgrupos.setText("Grupo");
         jPanel3.add(subgrupos);
@@ -276,28 +276,28 @@ public class equipos extends javax.swing.JFrame {
 
         Cnumero.setBackground(new java.awt.Color(255, 255, 102));
         Cnumero.setEditable(false);
-        Cnumero.setFont(new java.awt.Font("Arial", 1, 12));
+        Cnumero.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Cnumero.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Cnumero.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel3.add(Cnumero);
         Cnumero.setBounds(140, 12, 40, 20);
 
-        Cfechareg.setFont(new java.awt.Font("Tahoma", 1, 12));
+        Cfechareg.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Cfechareg.setMinSelectableDate(new java.util.Date(-62135765898000L));
         Cfechareg = new com.toedter.calendar.JDateChooser("dd/MM/yyyy", "####-##-##", '_');
         Cfechareg.setFont(new java.awt.Font("Tahoma", 1, 12));
         jPanel3.add(Cfechareg);
-        Cfechareg.setBounds(260, 10, 110, 20);
+        Cfechareg.setBounds(260, 10, 110, 28);
 
         Ccodserv.setBackground(new java.awt.Color(255, 255, 102));
         Ccodserv.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         Ccodserv.setEditable(false);
         Ccodserv.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Ccodserv.setFont(new java.awt.Font("Tahoma", 1, 12));
+        Ccodserv.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel3.add(Ccodserv);
         Ccodserv.setBounds(140, 40, 40, 23);
 
-        Cdominio.setFont(new java.awt.Font("Arial", 1, 12));
+        Cdominio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Cdominio.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         Cdominio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel3.add(Cdominio);
@@ -306,23 +306,23 @@ public class equipos extends javax.swing.JFrame {
         Cservicio.setBackground(new java.awt.Color(255, 255, 102));
         Cservicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         Cservicio.setEditable(false);
-        Cservicio.setFont(new java.awt.Font("Tahoma", 1, 12));
+        Cservicio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel3.add(Cservicio);
         Cservicio.setBounds(190, 40, 320, 23);
 
         Cgrupo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         Cgrupo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        Cgrupo.setFont(new java.awt.Font("Arial", 1, 12));
+        Cgrupo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jPanel3.add(Cgrupo);
         Cgrupo.setBounds(140, 100, 130, 23);
 
         Cequipo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         Cequipo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        Cequipo.setFont(new java.awt.Font("Arial", 1, 12));
+        Cequipo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jPanel3.add(Cequipo);
         Cequipo.setBounds(140, 130, 130, 23);
 
-        Tabla1.setFont(new java.awt.Font("Tahoma", 1, 12));
+        Tabla1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -357,15 +357,17 @@ public class equipos extends javax.swing.JFrame {
             }
         });
         tabla1.setViewportView(Tabla1);
-        Tabla1.getColumnModel().getColumn(0).setMinWidth(0);
-        Tabla1.getColumnModel().getColumn(0).setPreferredWidth(0);
-        Tabla1.getColumnModel().getColumn(0).setMaxWidth(0);
-        Tabla1.getColumnModel().getColumn(1).setMinWidth(80);
-        Tabla1.getColumnModel().getColumn(1).setPreferredWidth(80);
-        Tabla1.getColumnModel().getColumn(1).setMaxWidth(80);
-        Tabla1.getColumnModel().getColumn(2).setMinWidth(100);
-        Tabla1.getColumnModel().getColumn(2).setPreferredWidth(100);
-        Tabla1.getColumnModel().getColumn(2).setMaxWidth(100);
+        if (Tabla1.getColumnModel().getColumnCount() > 0) {
+            Tabla1.getColumnModel().getColumn(0).setMinWidth(0);
+            Tabla1.getColumnModel().getColumn(0).setPreferredWidth(0);
+            Tabla1.getColumnModel().getColumn(0).setMaxWidth(0);
+            Tabla1.getColumnModel().getColumn(1).setMinWidth(80);
+            Tabla1.getColumnModel().getColumn(1).setPreferredWidth(80);
+            Tabla1.getColumnModel().getColumn(1).setMaxWidth(80);
+            Tabla1.getColumnModel().getColumn(2).setMinWidth(100);
+            Tabla1.getColumnModel().getColumn(2).setPreferredWidth(100);
+            Tabla1.getColumnModel().getColumn(2).setMaxWidth(100);
+        }
 
         jPanel3.add(tabla1);
         tabla1.setBounds(10, 170, 510, 260);
@@ -403,9 +405,11 @@ public class equipos extends javax.swing.JFrame {
             }
         });
         jScrollPane4.setViewportView(Tabla2);
-        Tabla2.getColumnModel().getColumn(0).setMinWidth(100);
-        Tabla2.getColumnModel().getColumn(0).setPreferredWidth(100);
-        Tabla2.getColumnModel().getColumn(0).setMaxWidth(100);
+        if (Tabla2.getColumnModel().getColumnCount() > 0) {
+            Tabla2.getColumnModel().getColumn(0).setMinWidth(100);
+            Tabla2.getColumnModel().getColumn(0).setPreferredWidth(100);
+            Tabla2.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
 
         jPanel4.add(jScrollPane4);
         jScrollPane4.setBounds(20, 20, 500, 410);
@@ -436,9 +440,11 @@ public class equipos extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(Tabla3);
-        Tabla3.getColumnModel().getColumn(0).setMinWidth(0);
-        Tabla3.getColumnModel().getColumn(0).setPreferredWidth(0);
-        Tabla3.getColumnModel().getColumn(0).setMaxWidth(0);
+        if (Tabla3.getColumnModel().getColumnCount() > 0) {
+            Tabla3.getColumnModel().getColumn(0).setMinWidth(0);
+            Tabla3.getColumnModel().getColumn(0).setPreferredWidth(0);
+            Tabla3.getColumnModel().getColumn(0).setMaxWidth(0);
+        }
 
         jPanel5.add(jScrollPane1);
         jScrollPane1.setBounds(30, 30, 470, 350);

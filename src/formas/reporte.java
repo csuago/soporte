@@ -45,10 +45,10 @@ public class reporte extends javax.swing.JFrame {
        JPanel contenido = new JPanel();
        this.setContentPane(contenido);
        try{
-             cone = new MiConexionBD()      ;
-             cone.init();
-             Connection conn =(Connection) cone.getMiConexion();
-             stmt=conn.createStatement();
+             cone = cone.getInstance();
+             //cone.init();
+             //Connection conn = (Connection) MiConexionBD.getMiConexion();
+             stmt = cone.getSql();
              File f = new File("./imagenes/fondoimpre.jpg" );
              BufferedImage tmpImagen = ImageIO.read( f );
              BgBorder fondo = new BgBorder( tmpImagen );
@@ -56,7 +56,7 @@ public class reporte extends javax.swing.JFrame {
           }
 
        catch(Exception e)
-          {}
+          {e.printStackTrace();}
             initComponents();
             setIconImage (new ImageIcon("./imagenes/ibraico.png").getImage());
             setLocationRelativeTo(null);
@@ -105,7 +105,7 @@ public class reporte extends javax.swing.JFrame {
         btonrepo = new javax.swing.JButton();
         Btonsalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Listado de Soporte Tecnico");
         setIconImage(getIconImage());
         setResizable(false);
@@ -133,16 +133,18 @@ public class reporte extends javax.swing.JFrame {
         tabla.getTableHeader().setResizingAllowed(false);
         tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabla);
-        tabla.getColumnModel().getColumn(0).setMinWidth(0);
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(0);
-        tabla.getColumnModel().getColumn(0).setMaxWidth(0);
-        tabla.getColumnModel().getColumn(1).setResizable(false);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(150);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setMinWidth(0);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tabla.getColumnModel().getColumn(0).setMaxWidth(0);
+            tabla.getColumnModel().getColumn(1).setResizable(false);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(150);
+        }
 
-        btonrepo.setFont(new java.awt.Font("Tahoma", 1, 12));
+        btonrepo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btonrepo.setForeground(new java.awt.Color(0, 0, 102));
         btonrepo.setText("Mostrar Reporte");
-        btonrepo.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        btonrepo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btonrepo.setContentAreaFilled(false);
         btonrepo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,10 +152,10 @@ public class reporte extends javax.swing.JFrame {
             }
         });
 
-        Btonsalir.setFont(new java.awt.Font("Tahoma", 1, 14));
+        Btonsalir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Btonsalir.setForeground(new java.awt.Color(0, 0, 102));
         Btonsalir.setText("Salir");
-        Btonsalir.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        Btonsalir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Btonsalir.setContentAreaFilled(false);
         Btonsalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Btonsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -234,13 +236,14 @@ public class reporte extends javax.swing.JFrame {
              
             }
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,"Ocurrio un error: "+e.getMessage());
         }
 
 }//GEN-LAST:event_btonrepoActionPerformed
     
     private void BtonsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtonsalirActionPerformed
-        setVisible(false);
+        this.dispose();
 }//GEN-LAST:event_BtonsalirActionPerformed
 /**
  * @param args the command line arguments

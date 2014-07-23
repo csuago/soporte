@@ -247,7 +247,7 @@ public String verfecha(String fechaM){
 
 //public static String  ENCRIPTAR2(String lsdato_entrada)
 public static String ENCRIPTAR(String lsdato_entrada){
-  String vencripta;
+  /*String vencripta;
   //Variables utilizadas
   String lsdato_salida ="";
   char lc_comodin;
@@ -263,12 +263,13 @@ public static String ENCRIPTAR(String lsdato_entrada){
         lsdato_salida=lsdato_salida+lc_comodin;
   }
         vencripta=lsdato_salida;
-        return vencripta;
+        return vencripta;*/
+    return lsdato_entrada;
 }
 
  // METODO PARA DESENCRIPTAR
  public String DESENCRIPTAR(String lsdato_entrada){
-   String vdesencripta;
+   /*String vdesencripta;
    //Variables utilizadas
    String lsdato_salida ="";
    char lc_comodin;
@@ -284,7 +285,8 @@ public static String ENCRIPTAR(String lsdato_entrada){
 	lsdato_salida=lsdato_salida+lc_comodin;
      }
         vdesencripta=lsdato_salida;
-        return vdesencripta;
+        return vdesencripta;*/
+     return lsdato_entrada;
     }
 
 @SuppressWarnings("static-access")

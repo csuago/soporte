@@ -31,8 +31,8 @@ public class consulta extends javax.swing.JFrame {
     public consulta() {
     
         try{              
-             cone = new MiConexionBD()      ;
-             cone.init();
+             cone = cone.getInstance();
+             //cone.init();
              Connection conn =cone.getMiConexion();
              stmt=conn.createStatement();             
           }

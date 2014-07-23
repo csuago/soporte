@@ -28,9 +28,8 @@ public class busqueda extends javax.swing.JFrame {
     public busqueda() {
     
         try{              
-             cone = new MiConexionBD()      ;
-             cone.init();
-             Connection conn =cone.getMiConexion();
+             cone = cone.getInstance();
+             Connection conn = cone.getMiConexion();
              stmt=conn.createStatement();             
           }
         
