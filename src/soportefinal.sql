@@ -306,7 +306,7 @@ DROP TABLE IF EXISTS `inventario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `inventario` (
-  `codbien` int(3) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `codbien` int(3) unsigned zerofill NOT NULL,
   `codserv` int(3) unsigned zerofill NOT NULL,
   `edo_reg` char(1) DEFAULT NULL,
   `fecharec` date DEFAULT '0000-00-00',
@@ -323,6 +323,7 @@ CREATE TABLE `inventario` (
   `monitor` varchar(40) DEFAULT NULL,
   `regulador` varchar(40) DEFAULT NULL,
   `sistema` varchar(40) DEFAULT NULL,
+  `estado` bit(1) DEFAULT b'1',
   PRIMARY KEY (`codbien`),
   KEY `ind01` (`codserv`),
   CONSTRAINT `fk_servicio` FOREIGN KEY (`codserv`) REFERENCES `servicios` (`cod_serv`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -468,4 +469,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-23 22:36:27
+-- Dump completed on 2014-07-23 23:42:45
