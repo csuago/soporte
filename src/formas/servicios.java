@@ -212,6 +212,11 @@ public class servicios extends javax.swing.JFrame {
                 txtcodservActionPerformed(evt);
             }
         });
+        txtcodserv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcodservKeyTyped(evt);
+            }
+        });
         pane1.add(txtcodserv);
         txtcodserv.setBounds(100, 10, 50, 19);
 
@@ -232,14 +237,14 @@ public class servicios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "oid", "Codigo", "Descripcion"
+                "Código", "Descripción"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -250,6 +255,8 @@ public class servicios extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabla1.getTableHeader().setResizingAllowed(false);
+        Tabla1.getTableHeader().setReorderingAllowed(false);
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 Tabla1MousePressed(evt);
@@ -264,14 +271,6 @@ public class servicios extends javax.swing.JFrame {
             }
         });
         jScrollPane4.setViewportView(Tabla1);
-        if (Tabla1.getColumnModel().getColumnCount() > 0) {
-            Tabla1.getColumnModel().getColumn(0).setMinWidth(0);
-            Tabla1.getColumnModel().getColumn(0).setPreferredWidth(0);
-            Tabla1.getColumnModel().getColumn(0).setMaxWidth(0);
-            Tabla1.getColumnModel().getColumn(1).setMinWidth(50);
-            Tabla1.getColumnModel().getColumn(1).setPreferredWidth(50);
-            Tabla1.getColumnModel().getColumn(1).setMaxWidth(50);
-        }
 
         pane1.add(jScrollPane4);
         jScrollPane4.setBounds(20, 80, 600, 230);
@@ -306,7 +305,7 @@ public class servicios extends javax.swing.JFrame {
         jRadioButton1.setSelected(true);
         jRadioButton1.setText("Servicios");
         pane2.add(jRadioButton1);
-        jRadioButton1.setBounds(430, 6, 89, 23);
+        jRadioButton1.setBounds(430, 6, 79, 23);
 
         Btontabla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/limpiar.png"))); // NOI18N
         Btontabla.setToolTipText("Limpiar Tabla");
@@ -390,17 +389,15 @@ public class servicios extends javax.swing.JFrame {
     private void cargar_tabla() {
         DefaultTableModel tr = (DefaultTableModel) Tabla1.getModel();
         try {
-            rs = sql.executeQuery("select *  from servicios WHERE edo_reg='A' ORDER BY cod_serv");
+            rs = sql.executeQuery("SELECT * FROM servicios WHERE edo_reg='A' ORDER BY cod_serv");
             while (rs.next()) {
-                Integer vreg = rs.getInt("oid");
-                String vcodserv = rs.getString("cod_serv");
+                Integer cod = rs.getInt("cod_serv");
                 String vdenserv = rs.getString("den_serv");
-
-                tr.addRow(new Object[]{new Integer(vreg), vcodserv, vdenserv});
+                tr.addRow(new Object[]{new Integer(cod), vdenserv});
                 Tabla1.setModel(tr);
-                TableColumn column = null;
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -472,10 +469,9 @@ public class servicios extends javax.swing.JFrame {
         // Ingreso de Registro
         if (opcion == 0) {
             JOptionPane.showMessageDialog(this, "ELIGE UN OPCIÓN", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-        } else if(txtcodserv.getText().isEmpty() || txtdenserv.getText().isEmpty()) {
+        } else if (txtcodserv.getText().isEmpty() || txtdenserv.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "CAMPOS SIN RELLENAR.\nPOR FAVOR, ESCRIBA EN LOS CAMPOS VACIOS", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else if (existeCodServicio(txtcodserv.getText()) && opcion == 1) {
+        } else if (existeCodServicio(txtcodserv.getText()) && opcion == 1) {
             JOptionPane.showMessageDialog(this, "YA EXISTE ESTE CÓDIGO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
         } else if (existeServicio(txtdenserv.getText()) && opcion != 3) {
             JOptionPane.showMessageDialog(this, "YA EXISTE UNA ÁREA DE SERVICIO CON ESE NOMBRE", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
@@ -600,8 +596,8 @@ public class servicios extends javax.swing.JFrame {
     private void Tabla2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tabla2KeyPressed
         int fila = Tabla2.getSelectedRow();
         Numero = (Integer) Tabla2.getValueAt(fila, 0);
-        txtcodserv.setText(Tabla2.getValueAt(fila, 1).toString().trim());
-        txtdenserv.setText(Tabla2.getValueAt(fila, 2).toString().trim());
+        txtcodserv.setText(Tabla2.getValueAt(fila, 0).toString().trim());
+        txtdenserv.setText(Tabla2.getValueAt(fila, 1).toString().trim());
         tablapane.setSelectedIndex(0);
         Mtexto.setText(null);
         DefaultTableModel tr = (DefaultTableModel) Tabla2.getModel();
@@ -612,15 +608,15 @@ public class servicios extends javax.swing.JFrame {
     private void Tabla1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tabla1KeyReleased
         int fila = Tabla1.getSelectedRow();
         Numero = (Integer) Tabla1.getValueAt(fila, 0);
-        txtcodserv.setText(Tabla1.getValueAt(fila, 1).toString().trim());
-        txtdenserv.setText(Tabla1.getValueAt(fila, 2).toString().trim());
+        txtcodserv.setText(Tabla1.getValueAt(fila, 0).toString().trim());
+        txtdenserv.setText(Tabla1.getValueAt(fila, 1).toString().trim());
     }//GEN-LAST:event_Tabla1KeyReleased
 
     private void Tabla1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MousePressed
         int fila = Tabla1.getSelectedRow();
         Numero = (Integer) Tabla1.getValueAt(fila, 0);
-        txtcodserv.setText(Tabla1.getValueAt(fila, 1).toString().trim());
-        txtdenserv.setText(Tabla1.getValueAt(fila, 2).toString().trim());
+        txtcodserv.setText(Tabla1.getValueAt(fila, 0).toString().trim());
+        txtdenserv.setText(Tabla1.getValueAt(fila, 1).toString().trim());
         permiso();
         swe = 1;
     }//GEN-LAST:event_Tabla1MousePressed
@@ -635,11 +631,27 @@ public class servicios extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void Tabla1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseReleased
+        EDITAR_TABLA();
+    }//GEN-LAST:event_Tabla1MouseReleased
+
+    private void txtcodservKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodservKeyTyped
+        char key = evt.getKeyChar();
+        if (key >= '0' && key <= '9' || key == 8) {
+            if (txtcodserv.getText().length() >= 3) {
+                evt.consume();
+            }
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtcodservKeyTyped
+    
+    void EDITAR_TABLA() {
         int fila = Tabla1.getSelectedRow();
         Numero = (Integer) Tabla1.getValueAt(fila, 0);
-        txtcodserv.setText(Tabla1.getValueAt(fila, 1).toString().trim());
-        txtdenserv.setText(Tabla1.getValueAt(fila, 2).toString().trim());
-    }//GEN-LAST:event_Tabla1MouseReleased
+        txtcodserv.setText(Tabla1.getValueAt(fila, 0).toString().trim());
+        txtdenserv.setText(Tabla1.getValueAt(fila, 1).toString().trim());
+    }
+    
     private void permiso() {
         btonaceptar.setEnabled(false);
         if (txtopi.compareTo("0") == 0) {

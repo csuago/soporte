@@ -7,6 +7,7 @@ package formas;
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,6 +18,7 @@ public class MiConexionBD {
     private static Statement sql;
     private static Statement sql2;
     private static Statement sql3;
+    private PreparedStatement stmt;
     private ResultSet rs;
     private static Connection MiConexion;
     

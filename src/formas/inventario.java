@@ -14,6 +14,7 @@ import com.mysql.jdbc.Connection;
 import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,8 +37,8 @@ public class inventario extends javax.swing.JFrame {
     private ResultSet rs;
     private int opcion;
     public static int swe = 0;
-    public static String Nregistro, fecha;
-    public static String txtopi, txtopm, txtope;
+    public static String Nregistro;
+    public static String fecha, txtopi, txtopm, txtope;
     public String fecrec, fecdes, fecconte, Mfecha, mcode, mdes, Medoreg, Void;
     public static String fileName;
     proceso PROCE = new proceso();
@@ -116,7 +117,7 @@ public class inventario extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         Cfecharec = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        Ccodbien = new javax.swing.JComboBox();
+        cbBien = new javax.swing.JComboBox();
         Cnumbien = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -142,7 +143,7 @@ public class inventario extends javax.swing.JFrame {
         cpu = new javax.swing.JTextField();
         dvd = new javax.swing.JTextField();
         sistema = new javax.swing.JTextField();
-        teclado1 = new javax.swing.JTextField();
+        teclado = new javax.swing.JTextField();
         mouse = new javax.swing.JTextField();
         cornetas = new javax.swing.JTextField();
         monitor = new javax.swing.JTextField();
@@ -287,11 +288,11 @@ public class inventario extends javax.swing.JFrame {
         jPanel3.add(jLabel4);
         jLabel4.setBounds(188, 12, 70, 15);
 
-        Ccodbien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        Ccodbien.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BE", "BN" }));
-        Ccodbien.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(Ccodbien);
-        Ccodbien.setBounds(140, 70, 55, 25);
+        cbBien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbBien.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BE", "BN" }));
+        cbBien.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel3.add(cbBien);
+        cbBien.setBounds(140, 70, 55, 25);
 
         Cnumbien.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Cnumbien.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -310,11 +311,11 @@ public class inventario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "oid", "BIEN", "CODIGO", "SERVICIO"
+                "Codigo", "Fecha", "Servicio", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -328,7 +329,6 @@ public class inventario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        Tabla1.getTableHeader().setResizingAllowed(false);
         Tabla1.getTableHeader().setReorderingAllowed(false);
         Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -341,17 +341,6 @@ public class inventario extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(Tabla1);
-        if (Tabla1.getColumnModel().getColumnCount() > 0) {
-            Tabla1.getColumnModel().getColumn(0).setMinWidth(0);
-            Tabla1.getColumnModel().getColumn(0).setPreferredWidth(0);
-            Tabla1.getColumnModel().getColumn(0).setMaxWidth(0);
-            Tabla1.getColumnModel().getColumn(1).setMinWidth(50);
-            Tabla1.getColumnModel().getColumn(1).setPreferredWidth(50);
-            Tabla1.getColumnModel().getColumn(1).setMaxWidth(50);
-            Tabla1.getColumnModel().getColumn(2).setMinWidth(80);
-            Tabla1.getColumnModel().getColumn(2).setPreferredWidth(80);
-            Tabla1.getColumnModel().getColumn(2).setMaxWidth(80);
-        }
 
         jPanel3.add(jScrollPane3);
         jScrollPane3.setBounds(10, 310, 580, 120);
@@ -455,8 +444,8 @@ public class inventario extends javax.swing.JFrame {
         dvd.setBounds(140, 220, 180, 23);
         jPanel3.add(sistema);
         sistema.setBounds(400, 220, 180, 23);
-        jPanel3.add(teclado1);
-        teclado1.setBounds(400, 70, 180, 23);
+        jPanel3.add(teclado);
+        teclado.setBounds(400, 70, 180, 23);
         jPanel3.add(mouse);
         mouse.setBounds(400, 100, 180, 23);
         jPanel3.add(cornetas);
@@ -497,10 +486,11 @@ public class inventario extends javax.swing.JFrame {
         Cnumero.setText("");
         memoria.setText(null);
         tarjeta.setText(null);
+        teclado.setText(null);
         cpu.setText(null);
         Ccodserv.setText(null);
         Cservicio.setSelectedItem("");
-        Ccodbien.setSelectedItem("");
+        cbBien.setSelectedItem("");
         Cnumbien.setText(null);
         disco.setText(null);
         dvd.setText(null);
@@ -512,21 +502,31 @@ public class inventario extends javax.swing.JFrame {
         regulador.setText(null);
         sistema.setText(null);
         aviso.setText(null);
+        cargar_tabla();
+        cargar_servicios();
     }
 
     private void cargar_tabla() {
-        String valor = Ccodserv.getText();
+        //String valor = Ccodserv.getText();
         DefaultTableModel tr = (DefaultTableModel) Tabla1.getModel();
+        tr.setRowCount(0);
         try {
-            rs = sql.executeQuery("SELECT * FROM inventario INNER JOIN servicios on(servicios.cod_serv = inventario.codserv) WHERE inventario.edo_reg ='A'");
+            //rs = sql.executeQuery("SELECT * FROM inventario INNER JOIN servicios on(servicios.cod_serv = inventario.codserv) WHERE inventario.edo_reg ='A'");
+            rs = sql.executeQuery("SELECT i.codbien codbien, DATE_FORMAT(i.fecharec, '%d-%m-%Y') fecha, s.den_serv servicio, i.estado estado "
+                    + "FROM inventario i "
+                    + "INNER JOIN servicios s ON s.cod_serv = i.codserv "
+                    + "WHERE i.edo_reg ='A' ORDER BY i.codbien");
             while (rs.next()) {
-                Integer vreg = rs.getInt("oid");
-                String vbien = rs.getString("codbien") + "-" + rs.getString("numbien");
-                String vcodserv = rs.getString("codserv");
-                String vdenserv = rs.getString("den_serv").trim();
-                tr.addRow(new Object[]{new Integer(vreg), vbien, vcodserv, vdenserv});
+                /*Integer vreg = rs.getInt("oid");
+                 String vbien = rs.getString("codbien") + "-" + rs.getString("numbien");
+                 String vcodserv = rs.getString("codserv");
+                 String vdenserv = rs.getString("den_serv").trim();*/
+                String codigo = rs.getString("codbien");
+                String fecha = rs.getString("fecha");
+                String servicio = rs.getString("servicio");
+                boolean estado = rs.getBoolean("estado");
+                tr.addRow(new Object[]{codigo, fecha, servicio, estado});
                 Tabla1.setModel(tr);
-                TableColumn column = null;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -548,11 +548,11 @@ public class inventario extends javax.swing.JFrame {
      }*/
     public void buscar(String M1) {
         try {
-            rs = sql.executeQuery("select * from inventario where oid=" + M1 + " ");
+            rs = sql.executeQuery("select * from inventario WHERE codbien=" + M1 + " ");
             if (rs.next()) {
-                Cnumero.setText(rs.getString("oid"));
+                Cnumero.setText(rs.getString("codbien"));
                 Cfecharec.setDate(PROCE.Vfecha(rs.getDate("fecharec")));
-                Ccodbien.setSelectedItem(rs.getString("codbien"));
+                cbBien.setSelectedItem(rs.getString("bien"));
                 Cnumbien.setText(rs.getString("numbien"));
                 tarjeta.setText(rs.getString("tarjetamadre").toUpperCase().trim());
                 disco.setText(rs.getString("disco"));
@@ -566,8 +566,11 @@ public class inventario extends javax.swing.JFrame {
                 monitor.setText(rs.getString("monitor").toUpperCase().trim());
                 regulador.setText(rs.getString("regulador").toUpperCase().trim());
                 sistema.setText(rs.getString("sistema").toUpperCase().trim());
+                teclado.setText(rs.getString("teclado").toUpperCase().trim());
+                Ccodserv.setText(rs.getString("codserv"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -590,14 +593,32 @@ public class inventario extends javax.swing.JFrame {
     }
 
     private void btonincluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonincluirActionPerformed
-        opcion = 1;
-        aviso.setText("INCLUIR");
-        btonmodificar.setEnabled(false);
-        btoneliminar.setEnabled(false);
-        btoncancelar.setEnabled(true);
-        btonaceptar.setEnabled(true);
+        try {
+            if(existeCod(Cnumero.getText())) {
+                JOptionPane.showMessageDialog(this, "CÓDIGO YA EXISTE", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                opcion = 1;
+                aviso.setText("INCLUIR");
+                btonmodificar.setEnabled(false);
+                btoneliminar.setEnabled(false);
+                btoncancelar.setEnabled(true);
+                btonaceptar.setEnabled(true);
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btonincluirActionPerformed
 
+    boolean existeCod(String cod) throws SQLException {
+        rs = sql.executeQuery("SELECT codbien FROM inventario WHERE codbien = '"+cod+"' LIMIT 1");
+        if(rs.next()) {
+            return true;
+        }
+        return false;
+    }
+    
     private void btoneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btoneliminarActionPerformed
         if (swe != 0) {
             opcion = 3;
@@ -620,24 +641,19 @@ public class inventario extends javax.swing.JFrame {
         private void btonaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonaceptarActionPerformed
 
             // Ingreso de Registro
-            if (opcion != 3) {
-                if (Cnumbien.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "ESCRIBA EL CODIGO DEL BIEN", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-                } else if (Ccodserv.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "INSERTA UN SERVICIO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } else if (opcion == 3) {
-                if (Cnumbien.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "ELIJA UN REGISTRO CON CODIGO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-                }
+            if (Cnumbien.getText().isEmpty() && opcion != 3) {
+                JOptionPane.showMessageDialog(this, "ESCRIBA EL CODIGO DEL BIEN", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+            } else if (Ccodserv.getText().isEmpty() && opcion != 3) {
+                JOptionPane.showMessageDialog(this, "INSERTA UN SERVICIO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+            } else if (Cnumbien.getText().isEmpty() && opcion == 3) {
+                JOptionPane.showMessageDialog(this, "ELIJA UN REGISTRO CON CODIGO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 if (opcion == 1) {
-
                     try {
                         String vedoreg = "A";
                         String vfecharec = Gfecha(Cfecharec.getDate());
                         String vcodserv = Ccodserv.getText();
-                        String vcodbien = (String) Ccodbien.getSelectedItem();
+                        String vcodbien = (String) cbBien.getSelectedItem();
                         String vnumbien = Cnumbien.getText();
                         String vimpresora = impresora.getText().toUpperCase().trim();
                         String vtarjeta = tarjeta.getText().toUpperCase().trim();
@@ -655,7 +671,7 @@ public class inventario extends javax.swing.JFrame {
                         sql.executeUpdate("insert into inventario (edo_reg,"
                                 + "fecharec,"
                                 + "codserv,"
-                                + "codbien,"
+                                //+ "codbien,"
                                 + "numbien,"
                                 + "impresora,"
                                 + "tarjetamadre,"
@@ -668,11 +684,12 @@ public class inventario extends javax.swing.JFrame {
                                 + "corneta,"
                                 + "monitor,"
                                 + "regulador,"
-                                + "sistema) "
+                                + "sistema, "
+                                + "bien) "
                                 + "values('" + vedoreg + "',"
                                 + "'" + vfecharec + "',"
                                 + "'" + vcodserv + "',"
-                                + "'" + vcodbien + "',"
+                                //+ "'" + vcodbien + "',"
                                 + "'" + vnumbien + "',"
                                 + "'" + vimpresora + "',"
                                 + "'" + vtarjeta + "',"
@@ -685,17 +702,17 @@ public class inventario extends javax.swing.JFrame {
                                 + "'" + vcorneta + "',"
                                 + "'" + vmonitor + "',"
                                 + "'" + vregulador + "',"
-                                + "'" + vsistema + "')");
+                                + "'" + vsistema +"',"
+                                + "'" + cbBien.getSelectedItem().toString() + "')");
 
-                    } catch (Exception e) {
+                    } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 }
-
                 // Actualizacion del Registro
                 if (opcion == 2) {
                     int fila = Tabla1.getSelectedRow();
-                    Integer Numero = (Integer) Tabla1.getValueAt(fila, 0);
+                    String Numero = Tabla1.getValueAt(fila, 0).toString();
                     int a = JOptionPane.showConfirmDialog(this, "Desea Modificar el Registro"
                             + "", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
                     if (a == 0) {
@@ -703,25 +720,25 @@ public class inventario extends javax.swing.JFrame {
                         swe = 0;
                         try {
 
-                            sql.execute("update inventario "
-                                    + " set codserv = '" + Ccodserv.getText().toUpperCase().trim() + "'"
+                            sql.execute("UPDATE inventario "
+                                    + " SET codserv = '" + Ccodserv.getText().toUpperCase().trim() + "'"
                                     + ",procesador  = '" + cpu.getText().toUpperCase().trim() + "'"
                                     + ",fecharec    = '" + Gfecha(Cfecharec.getDate()) + "'"
                                     + ",codserv     = '" + Ccodserv.getText() + "'"
-                                    + ",codbien     = '" + Ccodbien.getSelectedItem() + "'"
+                                    + ",bien        = '" + cbBien.getSelectedItem() + "'"
                                     + ",numbien     = '" + Cnumbien.getText() + "'"
                                     + ",tarjetamadre= '" + tarjeta.getText().toUpperCase().trim() + "'"
                                     + ",disco       = '" + disco.getText().toUpperCase().trim() + "'"
                                     + ",memoria     = '" + memoria.getText().toUpperCase().trim() + "'"
                                     + ",dvdcd       = '" + dvd.getText().toUpperCase().trim() + "'"
                                     + ",impresora   = '" + impresora.getText().toUpperCase().trim() + "'"
-                                    + ",teclado     = '" + sistema.getText().toUpperCase().trim() + "'"
+                                    + ",teclado     = '" + teclado.getText().toUpperCase().trim() + "'"
                                     + ",mouse       = '" + mouse.getText().toUpperCase().trim() + "'"
                                     + ",corneta     = '" + cornetas.getText().toUpperCase().trim() + "'"
                                     + ",monitor     = '" + monitor.getText().toUpperCase().trim() + "'"
                                     + ",regulador   = '" + regulador.getText().toUpperCase().trim() + "'"
                                     + ",sistema     = '" + sistema.getText().toUpperCase().trim() + "'"
-                                    + "where oid       = '" + Numero + "'");
+                                    + "WHERE codbien = '" + Numero + "'");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -735,8 +752,9 @@ public class inventario extends javax.swing.JFrame {
                     if (a == 0) {
 
                         try {
-
-                            boolean state = sql.execute("UPDATE inventario SET edo_reg  ='D' WHERE oid ='" + Nregistro + "' ");
+                            int fila = Tabla1.getSelectedRow();
+                            Integer Numero = (Integer) Tabla1.getValueAt(fila, 0);
+                            boolean state = sql.execute("UPDATE inventario SET edo_reg  ='D' WHERE oid ='" + Numero + "' ");
 
                             if (!state) {
                                 JOptionPane.showMessageDialog(this, "OPERACION EXITOSA", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
@@ -754,25 +772,38 @@ public class inventario extends javax.swing.JFrame {
             }
 }//GEN-LAST:event_btonaceptarActionPerformed
 
-    void EDITAR_TABLA() {
+    void EDITAR_TABLA() throws ParseException {
         swe = 1;
         int fila = Tabla1.getSelectedRow();
-        String vregi = Tabla1.getValueAt(fila, 0).toString();
-        String vcode = Tabla1.getValueAt(fila, 2).toString();
-        String vdes = Tabla1.getValueAt(fila, 3).toString();
-        Nregistro = vregi;
-        Ccodserv.setText(vcode);
-        Cservicio.setSelectedItem(vdes);
+        String codigo = Tabla1.getValueAt(fila, 0).toString();
+        String fecha = Tabla1.getValueAt(fila, 1).toString();
+        //fecha
+        DateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+        Date date = formatter.parse(fecha);
+        Cfecharec.setDate(date);
+        String servicio = Tabla1.getValueAt(fila, 2).toString();
+        Nregistro = codigo;
+        Cnumero.setText(""+codigo);
+        Ccodserv.setText(null);
+        Cservicio.setSelectedItem(servicio);
         buscar(Nregistro);
         permiso();
     }
 
         private void Tabla1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tabla1KeyReleased
+        try {
             EDITAR_TABLA();
+        } catch (ParseException ex) {
+            Logger.getLogger(inventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }//GEN-LAST:event_Tabla1KeyReleased
 
         private void Tabla1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseReleased
+        try {
             EDITAR_TABLA();
+        } catch (ParseException ex) {
+            Logger.getLogger(inventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }//GEN-LAST:event_Tabla1MouseReleased
 
         private void btoncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btoncancelarActionPerformed
@@ -834,7 +865,6 @@ public class inventario extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox Ccodbien;
     private javax.swing.JTextField Ccodserv;
     private com.toedter.calendar.JDateChooser Cfecharec;
     private javax.swing.JTextField Cnumbien;
@@ -848,6 +878,7 @@ public class inventario extends javax.swing.JFrame {
     private javax.swing.JButton btoneliminar;
     private javax.swing.JButton btonincluir;
     private javax.swing.JButton btonmodificar;
+    private javax.swing.JComboBox cbBien;
     private javax.swing.JTextField cornetas;
     private javax.swing.JTextField cpu;
     private javax.swing.JTextField disco;
@@ -880,7 +911,7 @@ public class inventario extends javax.swing.JFrame {
     private javax.swing.JTextField regulador;
     private javax.swing.JTextField sistema;
     private javax.swing.JTextField tarjeta;
-    private javax.swing.JTextField teclado1;
+    private javax.swing.JTextField teclado;
     // End of variables declaration//GEN-END:variables
 
 }

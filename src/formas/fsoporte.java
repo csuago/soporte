@@ -10,6 +10,7 @@
  */
 package formas;
 
+import Controller.SoporteController;
 import com.mysql.jdbc.Connection;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -26,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+import model.Soporte;
 
 /**
  *
@@ -44,24 +46,26 @@ public class fsoporte extends javax.swing.JFrame {
     public static String fileName, mfila;
     proceso PROCE = new proceso();
     public Date d;
+    ClienteView cliente;
 
     /**
      * Creates new form fsoporte
      */
     public fsoporte() {
         initComponents();
-        Cfecharec.getDateEditor().setEnabled(false);
-        Cfechasal.getDateEditor().setEnabled(false);
-        Cfecharec.setMinSelectableDate(new Date());
-        Cfechasal.setMinSelectableDate(new Date());
+        textFechaEnt.getDateEditor().setEnabled(false);
+        textFechaSal.getDateEditor().setEnabled(false);
+        textFechaEnt.setMinSelectableDate(new Date());
+        textFechaSal.setMinSelectableDate(new Date());
         setIconImage(new ImageIcon("./imagenes/ibraico.png").getImage());
         setLocationRelativeTo(null);
-        Cfecharec.requestFocus();
+        textFechaEnt.requestFocus();
         JTableHeader cabeceraTabla1 = Tabla1.getTableHeader();
         cabeceraTabla1.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
         cabeceraTabla1.setBackground(new java.awt.Color(0, 102, 153));
         cabeceraTabla1.setForeground(new java.awt.Color(255, 255, 255));
-        cargar_servicios();
+        //cargar_servicios();
+        cargar_bienes();
         limpiar();
         DefaultTableModel tr = (DefaultTableModel) Tabla1.getModel();
         tr.setRowCount(0);
@@ -91,25 +95,21 @@ public class fsoporte extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Cdesequipo = new javax.swing.JTextArea();
+        textDesequipo = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Cdessoporte = new javax.swing.JTextArea();
+        textDessoporte = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        Cfecharec = new com.toedter.calendar.JDateChooser();
-        Cfechasal = new com.toedter.calendar.JDateChooser();
+        textFechaEnt = new com.toedter.calendar.JDateChooser();
+        textFechaSal = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        Ccodbien = new javax.swing.JComboBox();
-        Cnumbien = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tabla1 = new javax.swing.JTable();
-        Cnumero = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        Ccodserv = new javax.swing.JFormattedTextField();
+        textCodigo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        Cnomrec = new javax.swing.JFormattedTextField();
+        textAnalista = new javax.swing.JFormattedTextField();
         aviso = new javax.swing.JTextField();
         btonincluir = new javax.swing.JButton();
         btoneliminar = new javax.swing.JButton();
@@ -117,13 +117,15 @@ public class fsoporte extends javax.swing.JFrame {
         btoncancelar = new javax.swing.JButton();
         btonaceptar = new javax.swing.JButton();
         btonsalir = new javax.swing.JButton();
-        cbServicio = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
         chReparacion = new javax.swing.JCheckBox();
         chInstalacion = new javax.swing.JCheckBox();
         jLabel14 = new javax.swing.JLabel();
         chCerrado = new javax.swing.JCheckBox();
-        Cnoment = new javax.swing.JTextField();
+        textUsuario = new javax.swing.JTextField();
+        userFind = new javax.swing.JButton();
+        analistaFind = new javax.swing.JButton();
+        cbBien = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("REGISTRO DE SOPORE TECNICO");
@@ -132,6 +134,12 @@ public class fsoporte extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -154,33 +162,33 @@ public class fsoporte extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Usuario");
         jPanel3.add(jLabel2);
-        jLabel2.setBounds(10, 70, 55, 15);
+        jLabel2.setBounds(10, 80, 55, 15);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        Cdesequipo.setColumns(20);
-        Cdesequipo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Cdesequipo.setLineWrap(true);
-        Cdesequipo.setRows(5);
-        Cdesequipo.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(Cdesequipo);
+        textDesequipo.setColumns(20);
+        textDesequipo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        textDesequipo.setLineWrap(true);
+        textDesequipo.setRows(5);
+        textDesequipo.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(textDesequipo);
 
         jPanel3.add(jScrollPane1);
-        jScrollPane1.setBounds(140, 160, 330, 100);
+        jScrollPane1.setBounds(140, 140, 330, 100);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jScrollPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        Cdessoporte.setColumns(20);
-        Cdessoporte.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Cdessoporte.setLineWrap(true);
-        Cdessoporte.setRows(5);
-        Cdessoporte.setWrapStyleWord(true);
-        Cdessoporte.setEnabled(false);
-        jScrollPane2.setViewportView(Cdessoporte);
+        textDessoporte.setColumns(20);
+        textDessoporte.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        textDessoporte.setLineWrap(true);
+        textDessoporte.setRows(5);
+        textDessoporte.setWrapStyleWord(true);
+        textDessoporte.setEnabled(false);
+        jScrollPane2.setViewportView(textDessoporte);
 
         jPanel3.add(jScrollPane2);
-        jScrollPane2.setBounds(140, 270, 330, 100);
+        jScrollPane2.setBounds(140, 250, 330, 100);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("solicitud");
@@ -190,20 +198,25 @@ public class fsoporte extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Analista de soporte");
         jPanel3.add(jLabel11);
-        jLabel11.setBounds(10, 380, 130, 15);
+        jLabel11.setBounds(10, 360, 130, 15);
 
-        Cfecharec.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        Cfecharec.setMinSelectableDate(new java.util.Date(-62135765898000L));
-        Cfecharec = new com.toedter.calendar.JDateChooser("dd/MM/yyyy", "####-##-##", '_');
-        Cfecharec.setFont(new java.awt.Font("Tahoma", 1, 12));
-        jPanel3.add(Cfecharec);
-        Cfecharec.setBounds(260, 10, 110, 28);
+        textFechaEnt.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        textFechaEnt.setMinSelectableDate(new java.util.Date(-62135765898000L));
+        textFechaEnt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFechaEntFocusLost(evt);
+            }
+        });
+        textFechaEnt = new com.toedter.calendar.JDateChooser("dd/MM/yyyy", "####-##-##", '_');
+        textFechaEnt.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jPanel3.add(textFechaEnt);
+        textFechaEnt.setBounds(280, 10, 110, 28);
 
-        Cfechasal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        Cfechasal = new com.toedter.calendar.JDateChooser("dd/MM/yyyy", "####-##-##", '_');
-        Cfechasal.setFont(new java.awt.Font("Tahoma", 1, 12));
-        jPanel3.add(Cfechasal);
-        Cfechasal.setBounds(260, 40, 110, 28);
+        textFechaSal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        textFechaSal = new com.toedter.calendar.JDateChooser("dd/MM/yyyy", "####-##-##", '_');
+        textFechaSal.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jPanel3.add(textFechaSal);
+        textFechaSal.setBounds(280, 40, 110, 28);
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Entrada");
@@ -215,22 +228,11 @@ public class fsoporte extends javax.swing.JFrame {
         jPanel3.add(jLabel7);
         jLabel7.setBounds(190, 40, 50, 14);
 
-        Ccodbien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        Ccodbien.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BE", "BN" }));
-        Ccodbien.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(Ccodbien);
-        Ccodbien.setBounds(140, 130, 70, 25);
-
-        Cnumbien.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Cnumbien.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(Cnumbien);
-        Cnumbien.setBounds(220, 130, 160, 23);
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Código del bien");
         jPanel3.add(jLabel3);
-        jLabel3.setBounds(12, 134, 120, 15);
+        jLabel3.setBounds(10, 110, 120, 15);
 
         Tabla1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Tabla1.setModel(new javax.swing.table.DefaultTableModel(
@@ -238,7 +240,7 @@ public class fsoporte extends javax.swing.JFrame {
 
             },
             new String [] {
-                "oid", "BIEN", "CODIGO", "SERVICIO", "FECHA ENTRADA"
+                "CODIGO", "BIEN", "USUARIO", "ANALISTA", "FECHA ENTRADA"
             }
         ) {
             Class[] types = new Class [] {
@@ -268,53 +270,27 @@ public class fsoporte extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(Tabla1);
-        if (Tabla1.getColumnModel().getColumnCount() > 0) {
-            Tabla1.getColumnModel().getColumn(0).setMinWidth(0);
-            Tabla1.getColumnModel().getColumn(0).setPreferredWidth(0);
-            Tabla1.getColumnModel().getColumn(0).setMaxWidth(0);
-            Tabla1.getColumnModel().getColumn(1).setMinWidth(100);
-            Tabla1.getColumnModel().getColumn(1).setPreferredWidth(100);
-            Tabla1.getColumnModel().getColumn(1).setMaxWidth(100);
-            Tabla1.getColumnModel().getColumn(2).setMinWidth(50);
-            Tabla1.getColumnModel().getColumn(2).setPreferredWidth(50);
-            Tabla1.getColumnModel().getColumn(2).setMaxWidth(50);
-            Tabla1.getColumnModel().getColumn(4).setMinWidth(100);
-            Tabla1.getColumnModel().getColumn(4).setPreferredWidth(100);
-            Tabla1.getColumnModel().getColumn(4).setMaxWidth(100);
-        }
 
         jPanel3.add(jScrollPane3);
         jScrollPane3.setBounds(490, 90, 460, 410);
 
-        Cnumero.setEditable(false);
-        Cnumero.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Cnumero.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Cnumero.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(Cnumero);
-        Cnumero.setBounds(140, 12, 40, 20);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText("Área de servicio");
-        jPanel3.add(jLabel5);
-        jLabel5.setBounds(10, 100, 120, 15);
-
-        Ccodserv.setEditable(false);
-        Ccodserv.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        Ccodserv.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Ccodserv.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(Ccodserv);
-        Ccodserv.setBounds(140, 100, 50, 23);
+        textCodigo.setEditable(false);
+        textCodigo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        textCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textCodigo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel3.add(textCodigo);
+        textCodigo.setBounds(140, 12, 40, 20);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Diagnostico");
         jPanel3.add(jLabel12);
-        jLabel12.setBounds(10, 270, 125, 15);
+        jLabel12.setBounds(10, 250, 125, 15);
 
-        Cnomrec.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        Cnomrec.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel3.add(Cnomrec);
-        Cnomrec.setBounds(140, 380, 230, 23);
+        textAnalista.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        textAnalista.setEnabled(false);
+        textAnalista.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel3.add(textAnalista);
+        textAnalista.setBounds(140, 360, 190, 23);
 
         aviso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         aviso.setForeground(new java.awt.Color(0, 0, 153));
@@ -337,7 +313,7 @@ public class fsoporte extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btonincluir);
-        btonincluir.setBounds(110, 430, 120, 30);
+        btonincluir.setBounds(110, 450, 120, 30);
 
         btoneliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btoneliminar.setForeground(new java.awt.Color(0, 0, 102));
@@ -355,7 +331,7 @@ public class fsoporte extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btoneliminar);
-        btoneliminar.setBounds(110, 460, 120, 30);
+        btoneliminar.setBounds(110, 480, 120, 30);
 
         btonmodificar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btonmodificar.setForeground(new java.awt.Color(0, 0, 102));
@@ -372,7 +348,7 @@ public class fsoporte extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btonmodificar);
-        btonmodificar.setBounds(230, 430, 120, 30);
+        btonmodificar.setBounds(230, 450, 120, 30);
 
         btoncancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btoncancelar.setForeground(new java.awt.Color(0, 51, 102));
@@ -388,7 +364,7 @@ public class fsoporte extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btoncancelar);
-        btoncancelar.setBounds(230, 460, 120, 30);
+        btoncancelar.setBounds(230, 480, 120, 30);
 
         btonaceptar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btonaceptar.setForeground(new java.awt.Color(0, 0, 102));
@@ -408,7 +384,7 @@ public class fsoporte extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btonaceptar);
-        btonaceptar.setBounds(350, 430, 120, 30);
+        btonaceptar.setBounds(350, 450, 120, 30);
 
         btonsalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btonsalir.setForeground(new java.awt.Color(0, 0, 102));
@@ -426,25 +402,17 @@ public class fsoporte extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btonsalir);
-        btonsalir.setBounds(350, 460, 120, 30);
-
-        cbServicio.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbServicioItemStateChanged(evt);
-            }
-        });
-        jPanel3.add(cbServicio);
-        cbServicio.setBounds(220, 100, 250, 25);
+        btonsalir.setBounds(350, 480, 120, 30);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Descripción de la");
         jPanel3.add(jLabel13);
-        jLabel13.setBounds(10, 160, 130, 20);
+        jLabel13.setBounds(10, 140, 130, 20);
 
         chReparacion.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         chReparacion.setText("Reparación");
         jPanel3.add(chReparacion);
-        chReparacion.setBounds(10, 200, 106, 23);
+        chReparacion.setBounds(140, 400, 106, 23);
 
         chInstalacion.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         chInstalacion.setText("Instalación");
@@ -454,22 +422,44 @@ public class fsoporte extends javax.swing.JFrame {
             }
         });
         jPanel3.add(chInstalacion);
-        chInstalacion.setBounds(10, 230, 103, 23);
+        chInstalacion.setBounds(280, 400, 103, 23);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("solicitud");
         jPanel3.add(jLabel14);
-        jLabel14.setBounds(10, 180, 130, 20);
+        jLabel14.setBounds(10, 160, 130, 20);
 
         chCerrado.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         chCerrado.setText("Orden cerrada");
         jPanel3.add(chCerrado);
-        chCerrado.setBounds(10, 400, 120, 23);
+        chCerrado.setBounds(140, 430, 120, 23);
 
-        Cnoment.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        Cnoment.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(Cnoment);
-        Cnoment.setBounds(140, 70, 230, 23);
+        textUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        textUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        textUsuario.setEnabled(false);
+        jPanel3.add(textUsuario);
+        textUsuario.setBounds(140, 80, 180, 23);
+
+        userFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ver.png"))); // NOI18N
+        userFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userFindActionPerformed(evt);
+            }
+        });
+        jPanel3.add(userFind);
+        userFind.setBounds(330, 73, 30, 30);
+
+        analistaFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ver.png"))); // NOI18N
+        analistaFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                analistaFindActionPerformed(evt);
+            }
+        });
+        jPanel3.add(analistaFind);
+        analistaFind.setBounds(340, 360, 30, 30);
+
+        jPanel3.add(cbBien);
+        cbBien.setBounds(140, 110, 180, 28);
 
         Ficha.addTab("FICHA DE REGISTRO", jPanel3);
 
@@ -486,12 +476,12 @@ public class fsoporte extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(Ficha, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                .addComponent(Ficha, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 4, 1000, 560);
+        jPanel2.setBounds(0, 4, 1000, 590);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -508,21 +498,22 @@ public class fsoporte extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void limpiar() {
-        Cnumero.setText(null);
-        Cfecharec.setDate(new Date());
-        Cfechasal.setDate(new Date());
-        Cnoment.setText(null);
-        Cnomrec.setText(null);
-        cbServicio.setSelectedIndex(0);
-        Ccodbien.setSelectedItem(0);
-        Cnumbien.setText(null);
-        Cdesequipo.setText(null);
-        Cdessoporte.setText(null);
+        textCodigo.setText(null);
+        textFechaEnt.setDate(new Date());
+        textFechaSal.setDate(new Date());
+        textUsuario.setText(null);
+        textAnalista.setText(null);
+        //cbServicio.setSelectedIndex(0);
+        //Ccodbien.setSelectedItem(0);
+        cbBien.setSelectedItem(0);
+        textDesequipo.setText(null);
+        textDessoporte.setText(null);
         aviso.setText(null);
+        cargar_tabla();
     }
 
     private void cargar_tabla() {
-        String valor = Ccodserv.getText().trim();
+        //String valor = Ccodserv.getText().trim();
         DefaultTableModel tr = (DefaultTableModel) Tabla1.getModel();
         tr.setRowCount(0);
         try {
@@ -530,17 +521,13 @@ public class fsoporte extends javax.swing.JFrame {
              + "inner join servicios on(servicios.cod_serv = soporte.codserv)"
              + " WHERE soporte.codserv=" + valor + " and soporte.edo_reg ='A' "
              + "order by soporte.fecharec desc ");*/
-            rs = sql.executeQuery("SELECT * FROM soporte "
-                    + "inner join servicios on(servicios.cod_serv = soporte.codserv)"
-                    + " WHERE soporte.edo_reg ='A' "
-                    + "order by soporte.fecharec desc ");
+            /*rs = sql.executeQuery("SELECT * FROM soporte "
+             + "inner join servicios on(servicios.cod_serv = soporte.codserv)"
+             + " WHERE soporte.edo_reg ='A' "
+             + "order by soporte.fecharec desc ");*/
+            rs = sql.executeQuery("SELECT *, analista.nombre aname, cliente.nombre cname FROM soporte INNER JOIN cliente On cliente.codigo = soporte.cliente INNER JOIN analista ON analista.codigo = soporte.analista WHERE soporte.edo_reg ='A'");
             while (rs.next()) {
-                Integer vreg = rs.getInt("oid");
-                String vbien = rs.getString("codbien") + "-" + rs.getString("numbien");
-                String vcodserv = rs.getString("codserv");
-                String vdenserv = rs.getString("den_serv").trim();
-                String vfecrec = PROCE.Verfecha(rs.getDate("fecharec"));
-                tr.addRow(new Object[]{new Integer(vreg), vbien, vcodserv, vdenserv, vfecrec});
+                tr.addRow(new Object[]{new Integer(rs.getInt("oid")), rs.getString("codbien"), rs.getString("cname"), rs.getString("aname"), PROCE.Verfecha(rs.getDate("fecharec"))});
                 Tabla1.setModel(tr);
                 TableColumn column = null;
             }
@@ -549,48 +536,47 @@ public class fsoporte extends javax.swing.JFrame {
         }
     }
 
-    private void cargar_servicios() {
+    private void cargar_bienes() {
         try {
             flagState = true;
-            rs = sql.executeQuery("select * from servicios order by den_serv");
+            rs = sql.executeQuery("SELECT * FROM inventario ORDER BY codbien");
             while (rs.next()) {
-                cbServicio.addItem(rs.getString("den_serv"));
-                TableColumn column = null;
+                cbBien.addItem(rs.getString("codbien"));
             }
             flagState = false;
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            cargar_codServicios();
         }
     }
 
-    void cargar_codServicios() {
-        try {
-            ResultSet x = sql.executeQuery("SELECT cod_serv FROM servicios WHERE den_serv = '" + cbServicio.getSelectedItem().toString() + "'");
-            if (x.next()) {
-                Ccodserv.setText(x.getString("cod_serv"));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
+    /*void cargar_codServicios() {
+     try {
+     ResultSet x = sql.executeQuery("SELECT cod_serv FROM servicios WHERE den_serv = '" + cbServicio.getSelectedItem().toString() + "'");
+     if (x.next()) {
+     Ccodserv.setText(x.getString("cod_serv"));
+     }
+     } catch (SQLException ex) {
+     ex.printStackTrace();
+     }
+     }*/
     public void buscar(String M1) {
         try {
-            rs = sql.executeQuery("select * from soporte where oid=" + M1 + " ");
+            rs = sql.executeQuery("SELECT * FROM soporte WHERE oid=" + M1 + " ");
             if (rs.next()) {
-                Cnumero.setText(rs.getString("oid"));
-                Cnoment.setText(rs.getString("noment"));
-                Cnomrec.setText(rs.getString("nomrec"));
-                Cnumbien.setText(rs.getString("numbien"));
-                Cdesequipo.setText(rs.getString("desequipo").toUpperCase().trim());
-                Cdessoporte.setText(rs.getString("dessoporte").toUpperCase().trim());
-                Ccodbien.setSelectedItem(rs.getString("codbien"));
-                Cfecharec.setDate(PROCE.Vfecha(rs.getDate("fecharec")));
-                Cfechasal.setDate(PROCE.Vfecha(rs.getDate("fechasal")));
+                textCodigo.setText(rs.getString("oid"));
+                textUsuario.setText(rs.getString("cliente"));
+                textAnalista.setText(rs.getString("analista"));
+                //Cnumbien.setText(rs.getString("numbien"));
+                cbBien.setSelectedItem(rs.getString("codbien"));
+                textDesequipo.setText(rs.getString("desequipo").toUpperCase().trim());
+                textDessoporte.setText(rs.getString("dessoporte").toUpperCase().trim());
+                //Ccodbien.setSelectedItem(rs.getString("codbien"));
+                textFechaEnt.setDate(rs.getDate("fecharec"));
+                textFechaSal.setDate(rs.getDate("fechasal"));
+                //PROCE.Vfecha(
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -613,12 +599,16 @@ public class fsoporte extends javax.swing.JFrame {
     }
 
     private void btonincluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonincluirActionPerformed
-        opcion = 1;
-        aviso.setText("INCLUIR");
-        btonmodificar.setEnabled(false);
-        btoneliminar.setEnabled(false);
-        btoncancelar.setEnabled(true);
-        btonaceptar.setEnabled(true);
+        if (textCodigo.getText().isEmpty()) {
+            opcion = 1;
+            aviso.setText("INCLUIR");
+            btonmodificar.setEnabled(false);
+            btoneliminar.setEnabled(false);
+            btoncancelar.setEnabled(true);
+            btonaceptar.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "CODIGO EXISTE", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btonincluirActionPerformed
 
     private void btoneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btoneliminarActionPerformed
@@ -633,115 +623,201 @@ public class fsoporte extends javax.swing.JFrame {
 
     private void btonmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonmodificarActionPerformed
         if (swe != 0) {
-            opcion = 2;
-            swe = 1;
-            aviso.setText("MODIFICAR");
-            btoncancelar.setEnabled(true);
-            btonaceptar.setEnabled(true);
-            chInstalacion.setEnabled(true);
+            if (textCodigo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "CODIGO VACIO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                opcion = 2;
+                swe = 1;
+                aviso.setText("MODIFICAR");
+                btoncancelar.setEnabled(true);
+                btonaceptar.setEnabled(true);
+                chInstalacion.setEnabled(true);
+            }
         }//GEN-LAST:event_btonmodificarActionPerformed
     }
         private void btonaceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonaceptarActionPerformed
-
-            // Ingreso de Registro
-            if (Ccodserv.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "CODIGO DE ÁREA DE SERVICIO VACIO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-            } else if (Cnoment.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "ESCRIBA UN USUARIO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-            } else if (Cnumbien.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "POR FAVOR, INSERTE UN CÓDIGO DEL BIEN", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-            } else if (Cfecharec.isValid()) {
-                JOptionPane.showMessageDialog(this, "FECHA DE ENTRADA INVALIDA", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                if (opcion == 1) {
-
-                    try {
-
-                        String vedoreg = "A";
-                        String vnoment = Cnoment.getText().toUpperCase().trim();
-                        String vnomrec = Cnomrec.getText().toUpperCase().trim();
-                        String vcodserv = Ccodserv.getText();
-                        String vcodbien = (String) Ccodbien.getSelectedItem();
-                        String vnumbien = Cnumbien.getText();
-                        String mcedula = menu.Vcedula;
-                        String vdesequipo = Cdesequipo.getText().toUpperCase().trim();
-                        String vdessoporte = Cdessoporte.getText().toUpperCase().trim();
-                        String vfecharec = Gfecha(Cfecharec.getDate());
-                        String vfechasal = Gfecha(Cfechasal.getDate());
-                        boolean state = sql.execute("insert into soporte (edo_reg,noment,nomrec,codserv,codbien,numbien,desequipo,dessoporte,fecharec,fechasal,cedula,tiempo,reparacion,instalacion,cerrado) "
-                                + "values('" + vedoreg + "','" + vnoment + "','" + vnomrec + "','" + vcodserv + "','" + vcodbien + "','" + vnumbien + "','" + vdesequipo + "','" + vdessoporte + "','" + vfecharec + "','" + vfechasal + "','" + mcedula + "','" + getDateTime() + ",b'" + checkInt(chReparacion.isSelected()) + "',b'" + checkInt(chInstalacion.isSelected()) + "',b'" + checkInt(chCerrado.isSelected()) + "' )");
-
-                        if (!state) {
+            try {
+                if (textUsuario.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "ESCRIBA UN USUARIO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+                } else if (cbBien.getSelectedItem().toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "POR FAVOR, INSERTE UN CÓDIGO DEL BIEN", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+                } else if(textUsuario.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "POR FAVOR, INSERTE UN USUARIO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+                } else if(textAnalista.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "POR FAVOR, INSERTE UN ANALISTA", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    if (opcion == 1) {
+                        save();
+                        JOptionPane.showMessageDialog(this, "OPERACION EXITOSA", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+                    } else if (!textCodigo.getText().isEmpty()) {
+                        if (opcion == 2) {
+                            update();
                             JOptionPane.showMessageDialog(this, "OPERACION EXITOSA", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "A OCURRIDO UN ERROR EN LA OPERACIÓN", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                // Actualizacion del Registro
-                if (opcion == 2) {
-                    int fila = Tabla1.getSelectedRow();
-                    Integer Numero = (Integer) Tabla1.getValueAt(fila, 0);
-                    int a = JOptionPane.showConfirmDialog(this, "Desea Modificar el Registro"
-                            + "", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
-                    if (a == 0) {
-                        opcion = 0;
-                        swe = 0;
-
-                        try {
-                            boolean state = sql.execute("update soporte "
-                                    + " set noment  = '" + Cnoment.getText().toUpperCase().trim() + "'"
-                                    + ",nomrec      = '" + Cnomrec.getText().toUpperCase().trim() + "'"
-                                    + ",codserv     = '" + Ccodserv.getText() + "'"
-                                    + ",desequipo   = '" + Cdesequipo.getText().toUpperCase().trim() + "'"
-                                    + ",dessoporte  = '" + Cdessoporte.getText().toUpperCase().trim() + "'"
-                                    + ",codbien     = '" + Ccodbien.getSelectedItem() + "'"
-                                    + ",numbien     = '" + Cnumbien.getText() + "'"
-                                    + ",cedula      = '" + menu.Vcedula + "'"
-                                    + ",tiempo      = '" + getDateTime() + "'"
-                                    + ",fecharec    = '" + Gfecha(Cfecharec.getDate()) + "'"
-                                    + ",fechasal    = '" + Gfecha(Cfechasal.getDate()) + "'"
-                                    + ",reparacion  = b'" + checkInt(chReparacion.isSelected()) + "'"
-                                    + ",instalacion = b'" + checkInt(chInstalacion.isSelected()) + "'"
-                                    + ",cerrado     = b'" + checkInt(chCerrado.isSelected()) + "'"
-                                    + "WHERE oid       = '" + Numero + "'");
-
+                        } else if (opcion == 3) {
+                            boolean state = delete();
                             if (!state) {
                                 JOptionPane.showMessageDialog(this, "OPERACION EXITOSA", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(this, "A OCURRIDO UN ERROR EN LA OPERACIÓN", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
                             }
-                        } catch (Exception e) {
                         }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "CODIGO VACIO", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
                     }
+                    /*if (opcion == 1) {
+
+                     try {
+                     int usuario = textUsuario.getText();
+                     String vnomrec = textAnalista.getText().toUpperCase().trim();
+                     //String vcodserv = Ccodserv.getText();
+                     String vcodbien = (String) Ccodbien.getSelectedItem();
+                     String vnumbien = cbBien.getText();
+                     String mcedula = menu.Vcedula;
+                     String vdesequipo = textDesequipo.getText().toUpperCase().trim();
+                     String vdessoporte = textDessoporte.getText().toUpperCase().trim();
+                     String vfecharec = Gfecha(textFechaEnt.getDate());
+                     String vfechasal = Gfecha(textFechaSal.getDate());
+                     boolean state = sql.execute("insert into soporte (edo_reg,noment,nomrec,codserv,codbien,numbien,desequipo,dessoporte,fecharec,fechasal,cedula,tiempo,reparacion,instalacion,cerrado) "
+                     + "values('" + vedoreg + "','" + vnoment + "','" + vnomrec + "','" + vcodserv + "','" + vcodbien + "','" + vnumbien + "','" + vdesequipo + "','" + vdessoporte + "','" + vfecharec + "','" + vfechasal + "','" + mcedula + "','" + getDateTime() + ",b'" + checkInt(chReparacion.isSelected()) + "',b'" + checkInt(chInstalacion.isSelected()) + "',b'" + checkInt(chCerrado.isSelected()) + "' )");
+
+                     if (!state) {
+                     JOptionPane.showMessageDialog(this, "OPERACION EXITOSA", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+                     } else {
+                     JOptionPane.showMessageDialog(this, "A OCURRIDO UN ERROR EN LA OPERACIÓN", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
+                     }
+
+                     } catch (Exception e) {
+                     e.printStackTrace();
+                     }
+                     }
+                     // Actualizacion del Registro
+                     if (opcion == 2) {
+                     int fila = Tabla1.getSelectedRow();
+                     Integer Numero = (Integer) Tabla1.getValueAt(fila, 0);
+                     int a = JOptionPane.showConfirmDialog(this, "Desea Modificar el Registro"
+                     + "", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
+                     if (a == 0) {
+                     opcion = 0;
+                     swe = 0;
+
+                     try {
+                     boolean state = sql.execute("update soporte "
+                     + " set noment  = '" + textUsuario.getText().toUpperCase().trim() + "'"
+                     + ",nomrec      = '" + textAnalista.getText().toUpperCase().trim() + "'"
+                     //+ ",codserv     = '" + Ccodserv.getText() + "'"
+                     + ",desequipo   = '" + textDesequipo.getText().toUpperCase().trim() + "'"
+                     + ",dessoporte  = '" + textDessoporte.getText().toUpperCase().trim() + "'"
+                     + ",codbien     = '" + Ccodbien.getSelectedItem() + "'"
+                     + ",numbien     = '" + cbBien.getText() + "'"
+                     + ",cedula      = '" + menu.Vcedula + "'"
+                     + ",tiempo      = '" + getDateTime() + "'"
+                     + ",fecharec    = '" + Gfecha(textFechaEnt.getDate()) + "'"
+                     + ",fechasal    = '" + Gfecha(textFechaSal.getDate()) + "'"
+                     + ",reparacion  = b'" + checkInt(chReparacion.isSelected()) + "'"
+                     + ",instalacion = b'" + checkInt(chInstalacion.isSelected()) + "'"
+                     + ",cerrado     = b'" + checkInt(chCerrado.isSelected()) + "'"
+                     + "WHERE oid       = '" + Numero + "'");
+
+                     if (!state) {
+                     JOptionPane.showMessageDialog(this, "OPERACION EXITOSA", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+                     } else {
+                     JOptionPane.showMessageDialog(this, "A OCURRIDO UN ERROR EN LA OPERACIÓN", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
+                     }
+                     } catch (Exception e) {
+                     }
+                     }
+                     }
+                     // Eliminacion del Registro
+                     if (opcion == 3) {
+                     int a = JOptionPane.showConfirmDialog(this, "DESEA ELIMINAR EL REGISTRO"
+                     + "", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
+                     if (a == 0) {
+
+                     try {
+
+                     boolean state = sql.execute("UPDATE soporte SET edo_reg  ='D' WHERE oid ='" + txtCodigo.getText() + "' ");
+
+                     if (!state) {
+                     JOptionPane.showMessageDialog(this, "OPERACION EXITOSA", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
+                     } else {
+                     JOptionPane.showMessageDialog(this, "A OCURRIDO UN ERROR EN LA OPERACIÓN", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
+                     }
+                     } catch (Exception e) {
+                     }
+                     }
+                     }*/
+                    cargar_tabla();
+                    swe = 0;
+                    limpiar();
                 }
-                // Eliminacion del Registro
-                if (opcion == 3) {
-                    int a = JOptionPane.showConfirmDialog(this, "DESEA ELIMINAR EL REGISTRO"
-                            + "", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
-                    if (a == 0) {
-
-                        try {
-
-                            boolean state = sql.execute("UPDATE soporte SET edo_reg  ='D' WHERE oid ='" + Cnumero.getText() + "' ");
-
-                            if (!state) {
-                                JOptionPane.showMessageDialog(this, "OPERACION EXITOSA", "A T E N C I O N", JOptionPane.INFORMATION_MESSAGE);
-                            } else {
-                                JOptionPane.showMessageDialog(this, "A OCURRIDO UN ERROR EN LA OPERACIÓN", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
-                            }
-                        } catch (Exception e) {
-                        }
-                    }
-                }
-                cargar_tabla();
-                swe = 0;
-                limpiar();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "A OCURRIDO UN ERROR EN LA OPERACIÓN", "A T E N C I O N", JOptionPane.ERROR_MESSAGE);
             }
 }//GEN-LAST:event_btonaceptarActionPerformed
+
+    boolean save() throws SQLException {
+        //int codigo = Integer.parseInt(textCodigo.getText());
+        SoporteController control = new SoporteController();
+        if (textCodigo.getText().isEmpty()) {
+            int user = Integer.parseInt(textUsuario.getText());
+            int analista = Integer.parseInt(textAnalista.getText());
+            java.sql.Date entrada = new java.sql.Date(textFechaEnt.getDate().getTime());
+            java.sql.Date salida = new java.sql.Date(textFechaSal.getDate().getTime());
+            int codbien = Integer.parseInt(cbBien.getSelectedItem().toString());
+            String descripcion = textDessoporte.getText();
+            String diagnostico = textDesequipo.getText();
+            boolean reparacion = chReparacion.isSelected();
+            boolean instalacion = chInstalacion.isSelected();
+            boolean cerrado = chCerrado.isSelected();
+            Soporte data = new Soporte();
+            data.setCliente(user);
+            data.setAnalista(analista);
+            data.setFechaRec(entrada);
+            data.setFechaSal(salida);
+            data.setCodBien(codbien);
+            data.setDesEquipo(diagnostico);
+            data.setDesSoporte(descripcion);
+            data.setInstalacion(reparacion);
+            data.setInstalacion(instalacion);
+            data.setCerrado(cerrado);
+            return control.createSoporte(data);
+        }
+        return true;
+    }
+
+    boolean update() throws SQLException {
+        int codigo = Integer.parseInt(textCodigo.getText());
+        int user = Integer.parseInt(textUsuario.getText());
+        int analista = Integer.parseInt(textAnalista.getText());
+        java.sql.Date entrada = new java.sql.Date(textFechaEnt.getDate().getTime());
+        java.sql.Date salida = new java.sql.Date(textFechaSal.getDate().getTime());
+        int codbien = Integer.parseInt(cbBien.getSelectedItem().toString());
+        String descripcion = textDessoporte.getText();
+        String diagnostico = textDesequipo.getText();
+        boolean reparacion = chReparacion.isSelected();
+        boolean instalacion = chInstalacion.isSelected();
+        boolean cerrado = chCerrado.isSelected();
+        SoporteController control = new SoporteController();
+        Soporte data = new Soporte();
+        data.setOid(codigo);
+        data.setCliente(user);
+        data.setAnalista(analista);
+        data.setFechaRec(entrada);
+        data.setFechaSal(salida);
+        data.setCodBien(codbien);
+        data.setDesEquipo(diagnostico);
+        data.setDesSoporte(descripcion);
+        data.setInstalacion(reparacion);
+        data.setInstalacion(instalacion);
+        data.setCerrado(cerrado);
+        return control.update(data);
+    }
+
+    boolean delete() throws SQLException {
+        return sql.execute("UPDATE soporte SET edo_reg  ='D' WHERE oid ='" + Integer.parseInt(textCodigo.getText()) + "' ");
+    }
 
     int checkInt(boolean val) {
         return (val == true) ? 1 : 0;
@@ -768,18 +844,20 @@ public class fsoporte extends javax.swing.JFrame {
     void EDITAR_TABLA() {
         swe = 1;
         int fila = Tabla1.getSelectedRow();
-        String vregi = Tabla1.getValueAt(fila, 0).toString();
-        String vcode = Tabla1.getValueAt(fila, 2).toString();
-        String vdes = Tabla1.getValueAt(fila, 3).toString();
-        Nregistro = vregi;
-        Ccodserv.setText(vcode);
-        cbServicio.setSelectedItem(vdes);
+        String codigo = Tabla1.getValueAt(fila, 0).toString();
+        //String vcode = Tabla1.getValueAt(fila, 2).toString();
+        //String vdes = Tabla1.getValueAt(fila, 3).toString();
+
+        //ResultSet rs = sql.executeQuery("SELECT * FROM ")
+        Nregistro = codigo;
+        //Ccodserv.setText(vcode);
+        //cbServicio.setSelectedItem(vdes);
         //Cservicio.setText(vdes);
-        System.out.println("aqui");
-        buscar(Nregistro);
+        buscar(codigo);
         btonmodificar.setEnabled(true);
         btoneliminar.setEnabled(true);
         btonaceptar.setEnabled(true);
+
         //permiso();
     }
 
@@ -788,7 +866,7 @@ public class fsoporte extends javax.swing.JFrame {
             //tr.setRowCount(0);
             aviso.setText("");
             swe = 0;
-            Ccodserv.setText(null);
+            //Ccodserv.setText(null);
             limpiar();
             btonmodificar.setEnabled(false);
             btoneliminar.setEnabled(false);
@@ -809,17 +887,43 @@ public class fsoporte extends javax.swing.JFrame {
 
     private void chInstalacionStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chInstalacionStateChanged
         if (chInstalacion.isSelected() == true) {
-            Cdessoporte.setEnabled(true);
+            textDessoporte.setEnabled(true);
         } else {
-            Cdessoporte.setEnabled(false);
+            textDessoporte.setEnabled(false);
         }
     }//GEN-LAST:event_chInstalacionStateChanged
     boolean flagState;
-    private void cbServicioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbServicioItemStateChanged
-        if (flagState == false) {
-            cargar_codServicios();
+    private void textFechaEntFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFechaEntFocusLost
+        textFechaSal.setMinSelectableDate(textFechaEnt.getDate());
+    }//GEN-LAST:event_textFechaEntFocusLost
+
+    private void userFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userFindActionPerformed
+        int codigo;
+        if (textUsuario.getText().isEmpty()) {
+            codigo = 0;
+        } else {
+            codigo = Integer.parseInt(textUsuario.getText());
         }
-    }//GEN-LAST:event_cbServicioItemStateChanged
+        cliente = new ClienteView(this, 'U', codigo);
+    }//GEN-LAST:event_userFindActionPerformed
+
+    private void analistaFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analistaFindActionPerformed
+        int codigo;
+        if (textAnalista.getText().isEmpty()) {
+            codigo = 0;
+        } else {
+            codigo = Integer.parseInt(textAnalista.getText());
+        }
+        cliente = new ClienteView(this, 'A', codigo);
+    }//GEN-LAST:event_analistaFindActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        cliente.exit();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        cliente.exit();
+    }//GEN-LAST:event_formWindowClosing
 
     /*private void permiso() {
      btonaceptar.setEnabled(false);
@@ -850,18 +954,9 @@ public class fsoporte extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox Ccodbien;
-    private javax.swing.JFormattedTextField Ccodserv;
-    private javax.swing.JTextArea Cdesequipo;
-    private javax.swing.JTextArea Cdessoporte;
-    private com.toedter.calendar.JDateChooser Cfecharec;
-    private com.toedter.calendar.JDateChooser Cfechasal;
-    private javax.swing.JTextField Cnoment;
-    private javax.swing.JFormattedTextField Cnomrec;
-    private javax.swing.JTextField Cnumbien;
-    private javax.swing.JTextField Cnumero;
     private javax.swing.JTabbedPane Ficha;
     private javax.swing.JTable Tabla1;
+    public static javax.swing.JButton analistaFind;
     private javax.swing.JTextField aviso;
     private javax.swing.JButton btonaceptar;
     private javax.swing.JButton btoncancelar;
@@ -869,7 +964,7 @@ public class fsoporte extends javax.swing.JFrame {
     private javax.swing.JButton btonincluir;
     private javax.swing.JButton btonmodificar;
     private javax.swing.JButton btonsalir;
-    private javax.swing.JComboBox cbServicio;
+    private javax.swing.JComboBox cbBien;
     private javax.swing.JCheckBox chCerrado;
     private javax.swing.JCheckBox chInstalacion;
     private javax.swing.JCheckBox chReparacion;
@@ -882,7 +977,6 @@ public class fsoporte extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -890,6 +984,14 @@ public class fsoporte extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    public static javax.swing.JFormattedTextField textAnalista;
+    private javax.swing.JTextField textCodigo;
+    private javax.swing.JTextArea textDesequipo;
+    private javax.swing.JTextArea textDessoporte;
+    private com.toedter.calendar.JDateChooser textFechaEnt;
+    private com.toedter.calendar.JDateChooser textFechaSal;
+    public static javax.swing.JTextField textUsuario;
+    public static javax.swing.JButton userFind;
     // End of variables declaration//GEN-END:variables
 
 }
