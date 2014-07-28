@@ -11,16 +11,8 @@
 
 package formas;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -29,10 +21,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -47,15 +36,18 @@ import net.sf.jasperreports.view.JasperViewer;
 public class reporte extends javax.swing.JFrame {
    private MiConexionBD cone;
    private java.sql.Statement stmt;
-   public static  String fileName;
+   public   String fileName;
    public  static String Mgrupo,Musuario,Mcoddoc,Mcoddes;
-
+   private Map paremeters ;
+        
   
     /** Creates new form reportes */
     public reporte() {
        JPanel contenido = new JPanel();
        this.setContentPane(contenido);
+       paremeters= new HashMap();
        try{
+         
 //             cone = cone.getInstance();
              //cone.init();
              //Connection conn = (Connection) MiConexionBD.getMiConexion();
@@ -64,43 +56,14 @@ public class reporte extends javax.swing.JFrame {
              BgBorder fondo = new BgBorder( tmpImagen );
              contenido.setBorder(fondo);
           }
-
        catch(Exception e)
           {e.printStackTrace();}
             initComponents();
             setIconImage (new ImageIcon("./imagenes/ibraico.png").getImage());
             setLocationRelativeTo(null);
-//            cargar_busqueda() ;           
     }
 
  
-//    private void cargar_busqueda()
-//    {
-//       DefaultTableModel tr = (DefaultTableModel)tabla.getModel();
-//         
-//       try
-//         {
-//               Statement s = (Statement) cone.getMiConexion().createStatement();
-//               String consul="select codigo,descrip from repolist where edo_reg='A'";
-//               ResultSet rs = s.executeQuery(consul);
-//
-//                while (rs.next())
-//                    {
-//                      String var1 = rs.getString("codigo");
-//                      String var2 = rs.getString("descrip");                    
-//                      tr.addRow(new Object[]{var1, var2,});
-//                      tabla.setModel(tr);
-//                      TableColumn column = null;
-//                      for (int i = 0; i < 1; i++) {
-//                        column = tabla.getColumnModel().getColumn(i);
-//                        if (i == 0) {column.setPreferredWidth(0);}
-//                        if (i == 1) {column.setPreferredWidth(150);}                       
-//                       }
-//                    }
-//         }
-//             catch (Exception e)
-//         { }
-//   }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -208,8 +171,7 @@ public class reporte extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btonrepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonrepoActionPerformed
-        Map paremeters = new HashMap();
-        paremeters.put("logo", getClass().getResourceAsStream("/imagenes/logohgs.jpg"));
+        
         switch (tabla.getSelectedRow()) {
             case 0:
                 
@@ -218,13 +180,13 @@ public class reporte extends javax.swing.JFrame {
                 
                 break;
             case 2:
-                print(getClass().getResource("/reporte/ListadoEquiposPendientes.jasper"), paremeters);
+                print(getClass().getResource("/reporte/ListadoEquiposPendientes.jasper"));
                 break;
             case 3:
-                print(getClass().getResource("/reporte/ListadoEquiposReparados.jasper"), paremeters);
+                print(getClass().getResource("/reporte/ListadosEquiposReparados.jasper"));
                 break;
             case 4:
-                print(getClass().getResource("/reporte/ListadoEquipos.jasper"), paremeters);
+                print(getClass().getResource("/reporte/ListadoEquipos.jasper"));
                 break;
             default:
                 JOptionPane.showMessageDialog(this, "  Elija una fila de Lista ", "A T E N C I O N", JOptionPane.PLAIN_MESSAGE);
@@ -238,16 +200,6 @@ public class reporte extends javax.swing.JFrame {
     private void BtonsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtonsalirActionPerformed
         this.dispose();
 }//GEN-LAST:event_BtonsalirActionPerformed
-/**
- * @param args the command line arguments
-*/
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new reporte().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btonsalir;
@@ -256,10 +208,11 @@ public class reporte extends javax.swing.JFrame {
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
     
-    private void print(URL fileName, Map parameters) {
+    private void print(URL fileName) {
         try {
             JasperReport report = (JasperReport) JRLoader.loadObject(fileName);
-            JasperPrint print = JasperFillManager.fillReport(report, parameters, MiConexionBD.getMiConexion());
+            paremeters.put("logo", getClass().getResourceAsStream("/imagenes/logohgs.jpg"));
+            JasperPrint print = JasperFillManager.fillReport(report, this.paremeters, MiConexionBD.getMiConexion());
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
             Logger.getLogger(reporte.class.getName()).log(Level.SEVERE, null, ex);

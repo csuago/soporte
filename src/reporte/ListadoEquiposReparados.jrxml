@@ -183,7 +183,7 @@ INNER JOIN analista
 ON soporte.analista=analista.codigo
 INNER JOIN cliente
 ON soporte.cliente=cliente.codigo
-WHERE soporte.cerrado=false]]>
+WHERE soporte.cerrado=true]]>
 		</queryString>
 		<field name="oid" class="java.lang.Integer">
 			<fieldDescription><![CDATA[]]></fieldDescription>
@@ -233,7 +233,7 @@ WHERE soporte.cerrado=false]]>
 		</group>
 	</subDataset>
 	<parameter name="logo" class="java.io.InputStream"/>
-	<queryString>
+	<queryString language="SQL">
 		<![CDATA[SELECT  soporte.oid
 ,soporte.fecharec,soporte.fechasal
 ,soporte.desequipo,soporte.dessoporte
@@ -245,7 +245,7 @@ INNER JOIN analista
 ON soporte.analista=analista.codigo
 INNER JOIN cliente
 ON soporte.cliente=cliente.codigo
-WHERE soporte.cerrado=false]]>
+WHERE soporte.cerrado=true]]>
 	</queryString>
 	<field name="oid" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -312,7 +312,7 @@ WHERE soporte.cerrado=false]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Listado de Equipos Pendientes]]></text>
+				<text><![CDATA[Listado de Equipos Reparados]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -344,10 +344,10 @@ WHERE soporte.cerrado=false]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="60" uuid="4e2cf52f-eaae-473a-89fb-c19eb24edbbb">
+					<jr:column width="68" uuid="4e2cf52f-eaae-473a-89fb-c19eb24edbbb">
 						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" uuid="4930d4b6-fa03-4857-b0ef-04a0ba4fa409"/>
+								<reportElement x="0" y="0" width="68" height="30" uuid="4930d4b6-fa03-4857-b0ef-04a0ba4fa409"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -356,7 +356,7 @@ WHERE soporte.cerrado=false]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField pattern="dd/MM/yyyy">
-								<reportElement x="0" y="0" width="60" height="20" uuid="f4c91f7a-2fbe-49f0-a148-e59874e63d37"/>
+								<reportElement x="0" y="0" width="68" height="20" uuid="f4c91f7a-2fbe-49f0-a148-e59874e63d37"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 								</textElement>
@@ -384,10 +384,10 @@ WHERE soporte.cerrado=false]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="100" uuid="6c470914-1be3-4ae4-b375-4e0a714aabb1">
+					<jr:column width="92" uuid="6c470914-1be3-4ae4-b375-4e0a714aabb1">
 						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="100" height="30" uuid="59d27e1b-b6ab-4120-adb4-01206895bcd8"/>
+								<reportElement x="0" y="0" width="92" height="30" uuid="59d27e1b-b6ab-4120-adb4-01206895bcd8"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -396,7 +396,7 @@ WHERE soporte.cerrado=false]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="100" height="20" uuid="5e85fd84-d214-45b7-a0f1-917c7fe8263e"/>
+								<reportElement x="0" y="0" width="92" height="20" uuid="5e85fd84-d214-45b7-a0f1-917c7fe8263e"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
@@ -405,10 +405,10 @@ WHERE soporte.cerrado=false]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="100" uuid="94a7def1-c6f3-48b4-9214-239feb78dc93">
+					<jr:column width="92" uuid="94a7def1-c6f3-48b4-9214-239feb78dc93">
 						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="100" height="30" uuid="c79f8e3c-d705-4063-8a73-794d22237be5"/>
+								<reportElement x="0" y="0" width="92" height="30" uuid="c79f8e3c-d705-4063-8a73-794d22237be5"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -417,7 +417,7 @@ WHERE soporte.cerrado=false]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="100" height="20" uuid="48fb31fb-7909-4c2c-bdfb-6dd04e3cd515"/>
+								<reportElement x="0" y="0" width="92" height="20" uuid="48fb31fb-7909-4c2c-bdfb-6dd04e3cd515"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
@@ -426,10 +426,10 @@ WHERE soporte.cerrado=false]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="30ce2ec6-f12c-40c4-9090-8aaea1a1c6ef">
+					<jr:column width="82" uuid="30ce2ec6-f12c-40c4-9090-8aaea1a1c6ef">
 						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="a2464772-acfc-424d-93ae-7367489a8596"/>
+								<reportElement x="0" y="0" width="82" height="30" uuid="a2464772-acfc-424d-93ae-7367489a8596"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -438,7 +438,7 @@ WHERE soporte.cerrado=false]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="70" height="20" uuid="83e4054f-9a7d-4d1f-af3c-1d11ad03d3d1"/>
+								<reportElement x="0" y="0" width="82" height="20" uuid="83e4054f-9a7d-4d1f-af3c-1d11ad03d3d1"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
@@ -447,10 +447,10 @@ WHERE soporte.cerrado=false]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="25864828-ed8a-4df4-9679-287a54253f72">
+					<jr:column width="80" uuid="25864828-ed8a-4df4-9679-287a54253f72">
 						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="90" height="30" uuid="9353d561-8ca1-4a94-b7b2-8762a4d07245"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="9353d561-8ca1-4a94-b7b2-8762a4d07245"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -460,7 +460,7 @@ WHERE soporte.cerrado=false]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="20" uuid="e9c01b25-f1ba-4038-8180-1b1030a5c09b"/>
+								<reportElement x="0" y="0" width="80" height="20" uuid="e9c01b25-f1ba-4038-8180-1b1030a5c09b"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
@@ -469,10 +469,10 @@ WHERE soporte.cerrado=false]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="63acc964-418a-4fe1-b6b1-563099d79d60">
+					<jr:column width="80" uuid="63acc964-418a-4fe1-b6b1-563099d79d60">
 						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="e60d68aa-e72b-4169-b12c-55f5881730e2"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="e60d68aa-e72b-4169-b12c-55f5881730e2"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -481,7 +481,7 @@ WHERE soporte.cerrado=false]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="70" height="20" uuid="6454adc1-2787-47ac-905c-2ce262f6979d"/>
+								<reportElement x="0" y="0" width="80" height="20" uuid="6454adc1-2787-47ac-905c-2ce262f6979d"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
@@ -490,7 +490,7 @@ WHERE soporte.cerrado=false]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="85" uuid="98ec5cba-a84c-4977-8021-3e67a891c036">
+					<jr:column width="83" uuid="98ec5cba-a84c-4977-8021-3e67a891c036">
 						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="83" height="30" uuid="5ed2bc7d-aea8-4a59-ac07-2050bf1c8818"/>
@@ -516,7 +516,7 @@ WHERE soporte.cerrado=false]]>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="28" splitType="Stretch">
+		<band height="54" splitType="Stretch">
 			<textField evaluationTime="Report">
 				<reportElement x="360" y="0" width="35" height="20" uuid="6ba6138c-8bb1-4695-b48a-a74a2f5186a4"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
