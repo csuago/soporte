@@ -25,7 +25,7 @@ public class MiConexionBD {
 
     private final static String bd = "soporte";
     private final static String login = "root";
-    private final static String password = "1234";
+    private final static String password = "";
     private final static String url = "jdbc:mysql://localhost:3306/" + bd;
 
     private MiConexionBD() {
@@ -44,6 +44,7 @@ public class MiConexionBD {
             sql3 = MiConexion.createStatement();
         } catch (Exception e) {
             System.out.println("ERROR AL TRATAR DE CONECTAR LA BASE DE DATOS  ");
+            System.exit(0);
         }
     }
     

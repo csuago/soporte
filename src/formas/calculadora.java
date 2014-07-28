@@ -45,7 +45,6 @@ public class calculadora extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         cuadro = new javax.swing.JTextField();
         igual = new javax.swing.JButton();
@@ -68,7 +67,7 @@ public class calculadora extends javax.swing.JFrame {
         decimal = new javax.swing.JButton();
         boton0 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setResizable(false);
 
@@ -80,41 +79,27 @@ public class calculadora extends javax.swing.JFrame {
         jLabel1.setFocusTraversalPolicyProvider(true);
         jLabel1.setOpaque(true);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(198, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         cuadro.setBackground(new java.awt.Color(255, 255, 102));
-        cuadro.setFont(new java.awt.Font("Tahoma", 1, 18));
+        cuadro.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         cuadro.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         igual.setBackground(new java.awt.Color(204, 204, 204));
-        igual.setFont(new java.awt.Font("Tahoma", 1, 12));
+        igual.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         igual.setText("=");
         igual.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         igual.setFocusable(false);
@@ -125,7 +110,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         suma.setBackground(new java.awt.Color(204, 204, 204));
-        suma.setFont(new java.awt.Font("Tahoma", 1, 8));
+        suma.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
         suma.setText("+");
         suma.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         suma.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +120,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         porciento.setBackground(new java.awt.Color(204, 204, 204));
-        porciento.setFont(new java.awt.Font("Tahoma", 1, 12));
+        porciento.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         porciento.setText("%");
         porciento.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         porciento.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +130,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         boton7.setBackground(new java.awt.Color(204, 204, 204));
-        boton7.setFont(new java.awt.Font("Tahoma", 1, 12));
+        boton7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton7.setText("7");
         boton7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         boton7.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +140,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         boton8.setBackground(new java.awt.Color(204, 204, 204));
-        boton8.setFont(new java.awt.Font("Tahoma", 1, 12));
+        boton8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton8.setText("8");
         boton8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         boton8.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +150,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         boton9.setBackground(new java.awt.Color(204, 204, 204));
-        boton9.setFont(new java.awt.Font("Tahoma", 1, 12));
+        boton9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton9.setText("9");
         boton9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         boton9.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +160,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         resta.setBackground(new java.awt.Color(204, 204, 204));
-        resta.setFont(new java.awt.Font("Tahoma", 1, 12));
+        resta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         resta.setText("-");
         resta.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         resta.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +170,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         boton6.setBackground(new java.awt.Color(204, 204, 204));
-        boton6.setFont(new java.awt.Font("Tahoma", 1, 12));
+        boton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton6.setText("6");
         boton6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         boton6.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +180,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         boton5.setBackground(new java.awt.Color(204, 204, 204));
-        boton5.setFont(new java.awt.Font("Tahoma", 1, 12));
+        boton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton5.setText("5");
         boton5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         boton5.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +190,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         boton4.setBackground(new java.awt.Color(204, 204, 204));
-        boton4.setFont(new java.awt.Font("Tahoma", 1, 12));
+        boton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton4.setText("4");
         boton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         boton4.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +200,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         btnsigno.setBackground(new java.awt.Color(204, 204, 204));
-        btnsigno.setFont(new java.awt.Font("Tahoma", 1, 10));
+        btnsigno.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         btnsigno.setText("+/-");
         btnsigno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnsigno.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +210,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         mult.setBackground(new java.awt.Color(204, 204, 204));
-        mult.setFont(new java.awt.Font("Tahoma", 1, 11));
+        mult.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         mult.setText("*");
         mult.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mult.setMaximumSize(new java.awt.Dimension(41, 25));
@@ -237,7 +222,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         boton3.setBackground(new java.awt.Color(204, 204, 204));
-        boton3.setFont(new java.awt.Font("Tahoma", 1, 12));
+        boton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton3.setText("3");
         boton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         boton3.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +232,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         boton2.setBackground(new java.awt.Color(204, 204, 204));
-        boton2.setFont(new java.awt.Font("Tahoma", 1, 12));
+        boton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton2.setText("2");
         boton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         boton2.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +242,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         boton1.setBackground(new java.awt.Color(204, 204, 204));
-        boton1.setFont(new java.awt.Font("Tahoma", 1, 12));
+        boton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton1.setText("1");
         boton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         boton1.addActionListener(new java.awt.event.ActionListener() {
@@ -267,7 +252,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         botonc.setBackground(new java.awt.Color(204, 204, 204));
-        botonc.setFont(new java.awt.Font("Tahoma", 1, 12));
+        botonc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         botonc.setText("C");
         botonc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonc.addActionListener(new java.awt.event.ActionListener() {
@@ -277,7 +262,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         div.setBackground(new java.awt.Color(204, 204, 204));
-        div.setFont(new java.awt.Font("Tahoma", 1, 12));
+        div.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         div.setText("/");
         div.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         div.addActionListener(new java.awt.event.ActionListener() {
@@ -287,7 +272,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         decimal.setBackground(new java.awt.Color(204, 204, 204));
-        decimal.setFont(new java.awt.Font("Tahoma", 1, 12));
+        decimal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         decimal.setText(".");
         decimal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         decimal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -302,7 +287,7 @@ public class calculadora extends javax.swing.JFrame {
         });
 
         boton0.setBackground(new java.awt.Color(204, 204, 204));
-        boton0.setFont(new java.awt.Font("Tahoma", 1, 12));
+        boton0.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton0.setText("0");
         boton0.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         boton0.addActionListener(new java.awt.event.ActionListener() {
@@ -378,7 +363,7 @@ public class calculadora extends javax.swing.JFrame {
                                     .addComponent(resta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(boton5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(boton4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnsigno, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                                    .addComponent(btnsigno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(boton6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -422,10 +407,6 @@ public class calculadora extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setVisible(false);
-}//GEN-LAST:event_jButton1ActionPerformed
 
     private void igualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_igualActionPerformed
         y=Double.parseDouble(cuadro.getText());
@@ -612,7 +593,6 @@ public class calculadora extends javax.swing.JFrame {
     private javax.swing.JButton decimal;
     private javax.swing.JButton div;
     private javax.swing.JButton igual;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

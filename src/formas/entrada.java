@@ -5,6 +5,7 @@
  */
 package formas;
 
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.logging.Level;

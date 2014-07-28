@@ -918,11 +918,15 @@ public class fsoporte extends javax.swing.JFrame {
     }//GEN-LAST:event_analistaFindActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        cliente.exit();
+        if(cliente != null) {
+            cliente.exit();
+        }
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        cliente.exit();
+        if(cliente != null) {
+            cliente.exit();
+        }
     }//GEN-LAST:event_formWindowClosing
 
     /*private void permiso() {
