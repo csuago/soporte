@@ -25,7 +25,7 @@ public class MiConexionBD {
 
     private final static String bd = "soporte";
     private final static String login = "root";
-    private final static String password = "1234";
+    private final static String password = "";
     private final static String url = "jdbc:mysql://localhost:3306/" + bd;
 
     private MiConexionBD() {

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoEquipos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2cd647d7-d856-41b4-be67-7d33808c5d39">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mysql"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="220"/>
+	<property name="ireport.y" value="11"/>
 	<subDataset name="Dataset1" uuid="00a0f5ad-0c1d-4dd4-a950-7a06c7a6afd0">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 		<queryString>
@@ -17,19 +18,20 @@
 		</queryString>
 	</subDataset>
 	<parameter name="logo" class="java.io.InputStream"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT * FROM soporte.inventario]]>
+	<queryString>
+		<![CDATA[SELECT inventario.*, servicios.den_serv FROM soporte.inventario INNER JOIN servicios
+ON inventario.codserv=servicios.cod_serv]]>
 	</queryString>
-	<field name="oid" class="java.lang.Integer">
+	<field name="codbien" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="fecharec" class="java.util.Date">
+	<field name="codserv" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="codserv" class="java.lang.String">
+	<field name="edo_reg" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="codbien" class="java.lang.String">
+	<field name="fecharec" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="numbien" class="java.lang.String">
@@ -71,6 +73,15 @@
 	<field name="sistema" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="estado" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bien" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="den_serv" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -88,9 +99,9 @@
 				</textElement>
 				<text><![CDATA[Hospital general del sur Dr. Pedro Iturbe]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy HH:mm">
+			<textField pattern="dd/MM/yyyy ">
 				<reportElement stretchType="RelativeToBandHeight" x="454" y="64" width="100" height="20" uuid="3ab69279-3252-407c-88fc-ce614b9279db"/>
-				<textElement>
+				<textElement textAlignment="Right">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
@@ -131,7 +142,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[N° de servicio:]]></text>
+				<text><![CDATA[[N°] servicio:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="101" height="31" uuid="9d5c852b-fd7f-4733-8ae6-fc1e7385b846"/>
@@ -152,7 +163,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nombre:]]></text>
+				<text><![CDATA[[N°] Nombre:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="123" width="101" height="31" uuid="616a658b-e5d8-4dfc-b0a5-8fa5075ebe6a"/>
@@ -187,21 +198,21 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{oid}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{codbien}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="false">
 				<reportElement x="150" y="30" width="405" height="31" uuid="29613342-0b7b-4403-bd84-5318bc2b13cd"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{codserv}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["["+$F{codserv}+"]   "+$F{den_serv}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="false">
 				<reportElement x="149" y="92" width="405" height="31" uuid="70fe6bce-f5cd-4b62-a553-83fb9a263fc2"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["["+$F{codbien}+"]"+$F{numbien}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["["+$F{codbien}+"]   "+$F{numbien}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="false">
 				<reportElement x="149" y="123" width="405" height="31" uuid="165b53b5-4fd4-4adc-b34d-6db996075a66"/>

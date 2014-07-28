@@ -11,17 +11,14 @@
 
 package formas;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
+import Controller.ClienteController;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,10 +26,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+import model.Cliente;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -47,15 +42,18 @@ import net.sf.jasperreports.view.JasperViewer;
 public class reporte extends javax.swing.JFrame {
    private MiConexionBD cone;
    private java.sql.Statement stmt;
-   public static  String fileName;
+   public   String fileName;
    public  static String Mgrupo,Musuario,Mcoddoc,Mcoddes;
-
+   private Map paremeters ;
+   private List<Cliente> lc;
   
     /** Creates new form reportes */
     public reporte() {
        JPanel contenido = new JPanel();
        this.setContentPane(contenido);
+       paremeters= new HashMap();
        try{
+         
 //             cone = cone.getInstance();
              //cone.init();
              //Connection conn = (Connection) MiConexionBD.getMiConexion();
@@ -64,43 +62,14 @@ public class reporte extends javax.swing.JFrame {
              BgBorder fondo = new BgBorder( tmpImagen );
              contenido.setBorder(fondo);
           }
-
        catch(Exception e)
           {e.printStackTrace();}
             initComponents();
             setIconImage (new ImageIcon("./imagenes/ibraico.png").getImage());
             setLocationRelativeTo(null);
-//            cargar_busqueda() ;           
     }
 
  
-//    private void cargar_busqueda()
-//    {
-//       DefaultTableModel tr = (DefaultTableModel)tabla.getModel();
-//         
-//       try
-//         {
-//               Statement s = (Statement) cone.getMiConexion().createStatement();
-//               String consul="select codigo,descrip from repolist where edo_reg='A'";
-//               ResultSet rs = s.executeQuery(consul);
-//
-//                while (rs.next())
-//                    {
-//                      String var1 = rs.getString("codigo");
-//                      String var2 = rs.getString("descrip");                    
-//                      tr.addRow(new Object[]{var1, var2,});
-//                      tabla.setModel(tr);
-//                      TableColumn column = null;
-//                      for (int i = 0; i < 1; i++) {
-//                        column = tabla.getColumnModel().getColumn(i);
-//                        if (i == 0) {column.setPreferredWidth(0);}
-//                        if (i == 1) {column.setPreferredWidth(150);}                       
-//                       }
-//                    }
-//         }
-//             catch (Exception e)
-//         { }
-//   }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -110,10 +79,96 @@ public class reporte extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog(this,true);
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         btonrepo = new javax.swing.JButton();
         Btonsalir = new javax.swing.JButton();
+
+        jDateChooser2.setDate(new Date());
+
+        jLabel1.setText("Desde:");
+
+        jLabel2.setText("Hasta:");
+
+        jDateChooser3.setDate(new Date());
+
+        jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Usuario");
+
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(0, 13, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addGap(27, 27, 27)
+                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Listado de Soporte Tecnico");
@@ -208,24 +263,38 @@ public class reporte extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btonrepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonrepoActionPerformed
-        Map paremeters = null;
+
         switch (tabla.getSelectedRow()) {
             case 0:
-                
+                setClientView(false);
+                jDialog1.setSize(220, 184);
+                jDialog1.setLocationRelativeTo(this);
+                jDialog1.setVisible(true);
                 break;
             case 1:
-                
+                setClientView(true);
+                jComboBox1.removeAllItems();
+                jDialog1.setSize(230, 200);
+                jDialog1.setLocationRelativeTo(this);
+                ClienteController cc = new ClienteController('U');
+                try {
+                    lc = cc.listCliente();
+                } catch (SQLException ex) {
+                    Logger.getLogger(reporte.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                for (Cliente cliente : lc) {
+                    jComboBox1.addItem(cliente.getCodigo() + " | " + cliente.getCedula());
+                }
+                jDialog1.setVisible(true);
                 break;
             case 2:
-                
+                print(getClass().getResource("/reporte/ListadoEquiposPendientes.jasper"));
                 break;
             case 3:
-                
+                print(getClass().getResource("/reporte/ListadoEquiposReparados.jasper"));
                 break;
             case 4:
-                paremeters = new HashMap();
-                paremeters.put("logo", getClass().getResourceAsStream("/imagenes/logohgs.jpg"));
-                print(getClass().getResource("/reporte/ListadoEquipos.jasper"), paremeters);
+                print(getClass().getResource("/reporte/ListadoEquipos.jasper"));
                 break;
             default:
                 JOptionPane.showMessageDialog(this, "  Elija una fila de Lista ", "A T E N C I O N", JOptionPane.PLAIN_MESSAGE);
@@ -239,31 +308,60 @@ public class reporte extends javax.swing.JFrame {
     private void BtonsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtonsalirActionPerformed
         this.dispose();
 }//GEN-LAST:event_BtonsalirActionPerformed
-/**
- * @param args the command line arguments
-*/
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new reporte().setVisible(true);
-            }
-        });
-    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
+        paremeters.put("ini", f.format(jDateChooser2.getDate()));
+        paremeters.put("fin", f.format(jDateChooser3.getDate()));
+        jDialog1.dispose();
+        if(lc!=null){
+            paremeters.put("cliente", lc.get(jComboBox1.getSelectedIndex()).getCodigo());
+            print(getClass().getResource("/reporte/ListadoPorCliente.jasper"));
+        }else{
+            print(getClass().getResource("/reporte/ListadoPorFecha.jasper"));
+        }
+            // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jDialog1.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btonsalir;
     private javax.swing.JButton btonrepo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
     
-    private void print(URL fileName, Map parameters) {
+    private void print(URL fileName) {
         try {
             JasperReport report = (JasperReport) JRLoader.loadObject(fileName);
-            JasperPrint print = JasperFillManager.fillReport(report, parameters, MiConexionBD.getMiConexion());
+            paremeters.put("logo", getClass().getResourceAsStream("/imagenes/logohgs.jpg"));
+            JasperPrint print = JasperFillManager.fillReport(report, this.paremeters, MiConexionBD.getMiConexion());
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
             Logger.getLogger(reporte.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    private void setClientView(boolean v){
+        jLabel3.setVisible(v);
+        jComboBox1.setVisible(v);
+    }
+            
 }
