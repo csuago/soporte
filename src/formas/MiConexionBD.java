@@ -43,13 +43,13 @@ public class MiConexionBD {
             sql2 = MiConexion.createStatement();
             sql3 = MiConexion.createStatement();
         } catch (Exception e) {
-            System.out.println("ERROR AL TRATAR DE CONECTAR LA BASE DE DATOS  ");
+            System.out.println("ERROR AL TRATAR DE CONECTAR LA BASE DE DATOS");
             System.exit(0);
         }
     }
     
     public static MiConexionBD getInstance(){
-        if(INSTANCE == null){
+        if(INSTANCE == null) {
             INSTANCE = new MiConexionBD();
         }
         return INSTANCE;

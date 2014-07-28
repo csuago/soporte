@@ -154,6 +154,7 @@ public class inventario extends javax.swing.JFrame {
         setTitle("REGISTRO DE EQUIPOS");
         setBackground(new java.awt.Color(0, 102, 153));
         setModalExclusionType(null);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
