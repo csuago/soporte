@@ -1,126 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version last-->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoEquiposPendiente" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="680" leftMargin="56" rightMargin="56" topMargin="56" bottomMargin="56" uuid="59e8f82c-57a1-4e1f-b94f-c7a6aa3a03d4">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoPorCliente" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="896" leftMargin="56" rightMargin="56" topMargin="56" bottomMargin="56" uuid="c8c391ee-81fb-40ab-b44c-d4fe40ea99de">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
 	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
 	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
-	<property name="ireport.zoom" value="0.8264462809917358"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="45"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mysql"/>
-	<style name="table">
-		<box>
-			<pen lineWidth="1.0" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table_TH" mode="Opaque" backcolor="#73B0E6">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table_CH" mode="Opaque" backcolor="#CFDBE6">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table 1_TH" mode="Opaque" backcolor="#73E6E6">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table 1_CH" mode="Opaque" backcolor="#CFE6E6">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table 2_TH" mode="Opaque" backcolor="#73E6E6">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table 2_CH" mode="Opaque" backcolor="#CFE6E6">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table 2_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table 3_TH" mode="Opaque" backcolor="#F0F8FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 			<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -138,25 +29,44 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<subDataset name="Reparados" uuid="79527e53-2547-4a8c-82ce-4cee47b83f7b">
+	<style name="Table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="GeneralUsu" uuid="a7e91d11-faed-4ae8-97e8-4f0848b11ee1">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mysql"/>
-		<parameter name="slFactory" class="java.lang.Object"/>
-		<parameter name="slSchema" class="java.lang.Object"/>
-		<parameter name="LoggedInUser" class="java.lang.Object"/>
-		<parameter name="LoggedInUsername" class="java.lang.Object"/>
+		<parameter name="cliente" class="java.lang.Integer"/>
+		<parameter name="fechafin" class="java.lang.String"/>
+		<parameter name="fechaini" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[SELECT  soporte.oid
 ,soporte.fecharec,soporte.fechasal
 ,soporte.desequipo,soporte.dessoporte
 ,cliente.cedula AS cliId,cliente.nombre AS cliNom
 ,analista.cedula AS anaId,analista.nombre AS anaNom
+,IF(soporte.cerrado=true,"Reparado","En reparacion") AS cerrado
 FROM soporte INNER JOIN  inventario
 ON soporte.codbien=inventario.codbien
 INNER JOIN analista
 ON soporte.analista=analista.codigo
 INNER JOIN cliente
 ON soporte.cliente=cliente.codigo
-WHERE soporte.cerrado=true]]>
+WHERE soporte.fecharec BETWEEN  $P{fechaini}  AND   $P{fechafin} 
+AND soporte.cliente = $P{cliente}]]>
 		</queryString>
 		<field name="oid" class="java.lang.Integer">
 			<fieldDescription><![CDATA[]]></fieldDescription>
@@ -177,90 +87,90 @@ WHERE soporte.cerrado=true]]>
 		<field name="cliNom" class="java.lang.String"/>
 		<field name="anaId" class="java.lang.String"/>
 		<field name="anaNom" class="java.lang.String"/>
-		<group name="oid">
-			<groupExpression><![CDATA[$F{oid}]]></groupExpression>
-		</group>
-		<group name="fecharec">
-			<groupExpression><![CDATA[$F{fecharec}]]></groupExpression>
-		</group>
-		<group name="fechasal">
-			<groupExpression><![CDATA[$F{fechasal}]]></groupExpression>
-		</group>
-		<group name="desequipo">
-			<groupExpression><![CDATA[$F{desequipo}]]></groupExpression>
-		</group>
-		<group name="dessoporte">
-			<groupExpression><![CDATA[$F{dessoporte}]]></groupExpression>
-		</group>
-		<group name="cliId">
-			<groupExpression><![CDATA[$F{cliId}]]></groupExpression>
-		</group>
-		<group name="cliNom">
-			<groupExpression><![CDATA[$F{cliNom}]]></groupExpression>
-		</group>
-		<group name="anaId">
-			<groupExpression><![CDATA[$F{anaId}]]></groupExpression>
-		</group>
-		<group name="anaNom">
-			<groupExpression><![CDATA[$F{anaNom}]]></groupExpression>
-		</group>
+		<field name="cerrado" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
 	</subDataset>
+	<parameter name="ini" class="java.lang.String"/>
+	<parameter name="fin" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
-	<parameter name="slFactory" class="java.lang.Object"/>
-	<parameter name="slSchema" class="java.lang.Object"/>
-	<parameter name="LoggedInUser" class="java.lang.Object"/>
-	<parameter name="LoggedInUsername" class="java.lang.Object"/>
+	<parameter name="cliente" class="java.lang.Integer"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT  count(soporte.oid),soporte.oid
+		<![CDATA[SELECT  count(soporte.oid), soporte.oid
 ,soporte.fecharec,soporte.fechasal
 ,soporte.desequipo,soporte.dessoporte
 ,cliente.cedula AS cliId,cliente.nombre AS cliNom
 ,analista.cedula AS anaId,analista.nombre AS anaNom
+,IF(soporte.cerrado=true,"Reparado","En reparacion") AS cerrado
 FROM soporte INNER JOIN  inventario
 ON soporte.codbien=inventario.codbien
 INNER JOIN analista
 ON soporte.analista=analista.codigo
 INNER JOIN cliente
 ON soporte.cliente=cliente.codigo
-WHERE soporte.cerrado=true]]>
+WHERE soporte.fecharec BETWEEN  $P{ini}  AND  $P{fin} 
+AND soporte.cliente = $P{cliente}]]>
 	</queryString>
+	<field name="count(soporte.oid)" class="java.lang.Long"/>
+	<field name="oid" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecharec" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechasal" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desequipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dessoporte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliId" class="java.lang.String"/>
+	<field name="cliNom" class="java.lang.String"/>
+	<field name="anaId" class="java.lang.String"/>
+	<field name="anaNom" class="java.lang.String"/>
+	<field name="cerrado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="90" splitType="Stretch">
-			<staticText>
-				<reportElement x="82" y="28" width="360" height="23" uuid="2697fa7d-36d3-4904-9c1f-bc7626bf0320"/>
-				<textElement rotation="None" markup="html">
-					<font fontName="Arial" size="18" isBold="true"/>
-					<paragraph lineSpacing="Double"/>
-				</textElement>
-				<text><![CDATA[Hospital general del sur Dr. Pedro Iturbe]]></text>
-			</staticText>
-			<image>
-				<reportElement x="1" y="1" width="81" height="80" uuid="347f0dd5-73c0-4be5-8c87-1b22993e02c5"/>
-				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
-			</image>
 			<textField pattern="dd/MM/yyyy ">
-				<reportElement key="" stretchType="RelativeToBandHeight" x="579" y="70" width="100" height="20" isRemoveLineWhenBlank="true" uuid="b4d20d6e-da6c-49cd-8e8b-5619a8e85a7f"/>
+				<reportElement key="" stretchType="RelativeToBandHeight" x="796" y="70" width="100" height="20" isRemoveLineWhenBlank="true" uuid="dfb9f656-ccf3-44bd-b1b3-2e81134e4e0b"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="534" y="70" width="45" height="20" uuid="5ba397de-5c97-4ebc-84f0-9982274e2b69"/>
+				<reportElement stretchType="RelativeToBandHeight" x="751" y="70" width="45" height="20" uuid="09822096-13d0-4d13-abaf-bdda00bf3089"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
+			<image>
+				<reportElement x="1" y="1" width="81" height="80" uuid="33254bf1-91d3-4d90-bcfa-4358809238b2"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="82" y="28" width="360" height="23" uuid="caab7749-3b55-4eab-92ad-b0c7d3890202"/>
+				<textElement rotation="None" markup="html">
+					<font fontName="Arial" size="18" isBold="true"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<text><![CDATA[Hospital general del sur Dr. Pedro Iturbe]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="36" splitType="Stretch">
+		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="0" width="678" height="35" uuid="c12b54c8-c539-428f-a6ec-5a87cbcfb863"/>
+				<reportElement x="1" y="0" width="895" height="35" uuid="9d983e71-462d-46b1-bb6c-729329e2db8e"/>
 				<box padding="0">
 					<topPen lineStyle="Solid"/>
 					<leftPen lineStyle="Solid"/>
@@ -270,23 +180,31 @@ WHERE soporte.cerrado=true]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Listado de Equipos Reparados]]></text>
+				<text><![CDATA[Listado de General por Usuario]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="319" splitType="Stretch">
-			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+		<band height="59" splitType="Stretch">
 			<componentElement>
-				<reportElement x="0" y="0" width="680" height="60" uuid="6a1bb983-47dd-44a7-a02a-8fd9e039c192"/>
+				<reportElement x="0" y="0" width="896" height="59" uuid="c4b8c9ea-d77e-4f1e-9212-52d9ef667b30"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Reparados" uuid="f718b4f3-a199-45db-8cc8-9834d1b28e42">
+					<datasetRun subDataset="GeneralUsu" uuid="44e492ac-b6f1-40fe-890a-de00dc2092e7">
+						<datasetParameter name="cliente">
+							<datasetParameterExpression><![CDATA[$P{cliente}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fechafin">
+							<datasetParameterExpression><![CDATA[$P{fin}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fechaini">
+							<datasetParameterExpression><![CDATA[$P{ini}]]></datasetParameterExpression>
+						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="40" uuid="c087f3db-9880-453c-9fcc-ec7f6b810d40">
+					<jr:column width="40" uuid="273140ab-2ed7-45b4-8272-e94879424e2c">
 						<jr:columnHeader style="Table 3_CH" height="30">
 							<staticText>
-								<reportElement x="0" y="0" width="40" height="30" uuid="0fa1dfa6-6416-4874-a5ec-73e25fb8632d"/>
+								<reportElement x="0" y="0" width="40" height="30" uuid="d7782920-5d44-43c3-af34-894645dcb243"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -295,7 +213,7 @@ WHERE soporte.cerrado=true]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 3_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="40" height="30" uuid="047fb7f2-ca99-4640-855f-3985f013e01d"/>
+								<reportElement x="0" y="0" width="40" height="30" uuid="24e299d6-3f45-4587-a580-402c36e25b57"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 								</textElement>
@@ -303,10 +221,10 @@ WHERE soporte.cerrado=true]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="60" uuid="1cebb65b-19fc-4934-8fe9-29e41e07f1df">
+					<jr:column width="60" uuid="6fdc6ecf-a91b-4e41-ade7-d9459a2a53b6">
 						<jr:columnHeader style="Table 3_CH" height="30">
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" uuid="612b229c-1b3a-4020-8ab8-1af4ca03b8d3"/>
+								<reportElement x="0" y="0" width="60" height="30" uuid="92d4ad88-7b8f-4f10-a49b-7f599930815e"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -315,7 +233,7 @@ WHERE soporte.cerrado=true]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 3_TD" height="30">
 							<textField pattern="dd/MM/yyyy">
-								<reportElement x="0" y="0" width="60" height="30" uuid="b44e9fd6-cefc-4c5e-86ad-15aa0ee8a9a5"/>
+								<reportElement x="0" y="0" width="60" height="30" uuid="9002866d-c842-443b-958d-7fc612f6f7e5"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 								</textElement>
@@ -323,10 +241,10 @@ WHERE soporte.cerrado=true]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="60" uuid="2900cc7f-5bbf-4264-a125-e563f8afa3b5">
+					<jr:column width="60" uuid="c8432d41-f33e-4117-ba07-77cb15e9fa8d">
 						<jr:columnHeader style="Table 3_CH" height="30">
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" uuid="12285a74-3092-431a-a200-5b74eca45aad"/>
+								<reportElement x="0" y="0" width="60" height="30" uuid="423dd4ac-be1a-4486-9831-204d4e3fd5da"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -335,7 +253,7 @@ WHERE soporte.cerrado=true]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 3_TD" height="30">
 							<textField pattern="dd/MM/yyyy">
-								<reportElement x="0" y="0" width="60" height="30" uuid="722da60d-9202-4278-9d3c-2f2cdcf32ac5"/>
+								<reportElement x="0" y="0" width="60" height="30" uuid="8d795e86-e351-43b2-9f84-262e24c35743"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 								</textElement>
@@ -343,10 +261,10 @@ WHERE soporte.cerrado=true]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="100" uuid="efb78aa6-4862-4083-bb32-95fe445f7478">
+					<jr:column width="140" uuid="d03fc474-597b-464f-ae04-13f2e4e8de17">
 						<jr:columnHeader style="Table 3_CH" height="30">
 							<staticText>
-								<reportElement x="0" y="0" width="100" height="30" uuid="a96f76fa-09c0-4528-92c3-b739286a9732"/>
+								<reportElement x="0" y="0" width="140" height="30" uuid="e321fcf9-4712-4cf0-ada6-04948bc0cc28"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -355,7 +273,7 @@ WHERE soporte.cerrado=true]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 3_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="100" height="30" uuid="d3817e0d-043d-46ca-aa83-e49d3d3ab2c5"/>
+								<reportElement x="0" y="0" width="140" height="30" uuid="11f882e6-afb1-431b-8df3-5ba5737eb0d0"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
@@ -364,10 +282,10 @@ WHERE soporte.cerrado=true]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="100" uuid="3c2020f3-0233-4748-ae7f-64ff8c73fd89">
+					<jr:column width="140" uuid="649e8adc-e317-45c6-a43d-d7c721edff7d">
 						<jr:columnHeader style="Table 3_CH" height="30">
 							<staticText>
-								<reportElement x="0" y="0" width="100" height="30" uuid="ebc1f13b-4218-4691-bd91-d0ebca4743d7"/>
+								<reportElement x="0" y="0" width="140" height="30" uuid="a60e3b48-63e4-4426-81dd-ba550c10ca74"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -376,7 +294,7 @@ WHERE soporte.cerrado=true]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 3_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="100" height="30" uuid="be595e97-e6cf-4b7e-ae83-d42c2c607914"/>
+								<reportElement x="0" y="0" width="140" height="30" uuid="30d46b34-1c7e-44fe-a94a-e80afd7c31ac"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
@@ -385,10 +303,10 @@ WHERE soporte.cerrado=true]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="9e556b46-11a9-4602-93b3-a10b6c131712">
+					<jr:column width="80" uuid="881a66c7-7ad6-45bf-88ec-6bd4acc65a2d">
 						<jr:columnHeader style="Table 3_CH" height="30">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="8172a095-e0f7-45fc-b538-95cd8c1b18b6"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="9e5d84b3-6876-413c-88ec-a8c490aa2b96"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -397,7 +315,7 @@ WHERE soporte.cerrado=true]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 3_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="70" height="30" uuid="6f34ae1c-2d84-4dea-be46-371d88f050a4"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="3c92d62b-c1d0-4b60-9d53-2de177c8537a"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
@@ -406,20 +324,19 @@ WHERE soporte.cerrado=true]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="497db632-9c09-4f89-977c-7dcdf33b4139">
+					<jr:column width="100" uuid="b73510f9-4a5e-4357-a547-2ca9ad967954">
 						<jr:columnHeader style="Table 3_CH" height="30">
 							<staticText>
-								<reportElement x="0" y="0" width="90" height="30" uuid="a7bb8663-d8a9-4c79-8ca8-ea10d4611382"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
+								<reportElement x="0" y="0" width="100" height="30" uuid="a29d0af3-4e70-4802-b40e-cbeb386738cd"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Nombre del analista
-]]></text>
+								<text><![CDATA[Nombre del analista]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 3_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="ae160416-ad7c-46a4-bddc-5f4ffd797d4b"/>
+								<reportElement x="0" y="0" width="100" height="30" uuid="15d40e59-2cc8-46e5-8f1e-efc92d0f28e4"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
@@ -428,10 +345,10 @@ WHERE soporte.cerrado=true]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="44c3d65a-be99-4775-b026-67ad2fc45d7b">
+					<jr:column width="80" uuid="e2a1e637-28f6-484b-9b53-6876a2059321">
 						<jr:columnHeader style="Table 3_CH" height="30">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="81cf6a0e-c887-4f18-8a83-f669f82a165d"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="bf100386-baec-430a-ad8c-f3758ad70e13"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -440,7 +357,7 @@ WHERE soporte.cerrado=true]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 3_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="70" height="30" uuid="7ff5d31f-b92e-41b2-a417-80b43507db74"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="59ee470c-49fe-4332-9b0c-49893e19efac"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
@@ -449,10 +366,10 @@ WHERE soporte.cerrado=true]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="f460a60c-bc5d-4993-9269-0c6a2a5f2ae6">
+					<jr:column width="100" uuid="3246b9f5-84ef-436a-a479-b4a1bb70f859">
 						<jr:columnHeader style="Table 3_CH" height="30">
 							<staticText>
-								<reportElement x="0" y="0" width="90" height="30" uuid="508885f0-c29f-468d-a7f1-436de0563e32"/>
+								<reportElement x="0" y="0" width="100" height="30" uuid="714eb7ed-d0dc-4dc1-b450-492ca361d04e"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" isBold="true"/>
 								</textElement>
@@ -461,12 +378,33 @@ WHERE soporte.cerrado=true]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table 3_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="3a5cf3a7-af72-4243-9ad3-e554ca4bfe70"/>
+								<reportElement x="0" y="0" width="100" height="30" uuid="d53c9f5c-ea04-426f-b874-d78f712f5e1a"/>
 								<textElement textAlignment="Justified" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 									<paragraph leftIndent="4"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{anaNom}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="94" uuid="afa6cb2a-4271-469c-b79b-c88eaabee218">
+						<jr:columnHeader style="Table 3_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="94" height="30" uuid="28140f40-1321-42dc-bc28-f70f8e61bd3d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Proceso]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="94" height="30" uuid="51a691bf-87e2-427c-bf6b-163ec59376a3"/>
+								<textElement textAlignment="Justified" verticalAlignment="Middle">
+									<font fontName="Arial"/>
+									<paragraph leftIndent="4"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cerrado}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -476,17 +414,17 @@ WHERE soporte.cerrado=true]]>
 	</detail>
 	<pageFooter>
 		<band height="20" splitType="Stretch">
-			<textField evaluationTime="Report">
-				<reportElement x="360" y="0" width="35" height="20" uuid="6ba6138c-8bb1-4695-b48a-a74a2f5186a4"/>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
 			<textField>
-				<reportElement x="298" y="0" width="60" height="20" uuid="11ae6978-d398-41a8-9ac5-9df4c249dd23"/>
+				<reportElement x="380" y="0" width="60" height="20" uuid="6322adb3-e0f5-470d-8e70-4cbb6fc050e3"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+"  / "]]></textFieldExpression>
 			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="442" y="0" width="35" height="20" uuid="5913a3cc-1421-48bf-ad26-1abaad55e05a"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 			<line>
-				<reportElement x="0" y="0" width="679" height="1" uuid="fdd5416e-62b2-4d6b-8ddf-c7996f636e39"/>
+				<reportElement x="0" y="0" width="894" height="1" uuid="2e7937ff-a67d-42d6-97c0-421b7a701e52"/>
 			</line>
 		</band>
 	</pageFooter>
