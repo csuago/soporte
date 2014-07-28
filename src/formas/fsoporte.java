@@ -131,17 +131,6 @@ public class fsoporte extends javax.swing.JFrame {
         setTitle("REGISTRO DE SOPORE TECNICO");
         setBackground(new java.awt.Color(0, 102, 153));
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jPanel1.setLayout(null);
 
@@ -162,7 +151,7 @@ public class fsoporte extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Usuario");
         jPanel3.add(jLabel2);
-        jLabel2.setBounds(10, 80, 55, 15);
+        jLabel2.setBounds(10, 80, 45, 15);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -210,13 +199,13 @@ public class fsoporte extends javax.swing.JFrame {
         textFechaEnt = new com.toedter.calendar.JDateChooser("dd/MM/yyyy", "####-##-##", '_');
         textFechaEnt.setFont(new java.awt.Font("Tahoma", 1, 12));
         jPanel3.add(textFechaEnt);
-        textFechaEnt.setBounds(280, 10, 110, 28);
+        textFechaEnt.setBounds(280, 10, 110, 20);
 
         textFechaSal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textFechaSal = new com.toedter.calendar.JDateChooser("dd/MM/yyyy", "####-##-##", '_');
         textFechaSal.setFont(new java.awt.Font("Tahoma", 1, 12));
         jPanel3.add(textFechaSal);
-        textFechaSal.setBounds(280, 40, 110, 28);
+        textFechaSal.setBounds(280, 40, 110, 20);
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Entrada");
@@ -412,7 +401,7 @@ public class fsoporte extends javax.swing.JFrame {
         chReparacion.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         chReparacion.setText("Reparación");
         jPanel3.add(chReparacion);
-        chReparacion.setBounds(140, 400, 106, 23);
+        chReparacion.setBounds(140, 400, 106, 25);
 
         chInstalacion.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         chInstalacion.setText("Instalación");
@@ -422,7 +411,7 @@ public class fsoporte extends javax.swing.JFrame {
             }
         });
         jPanel3.add(chInstalacion);
-        chInstalacion.setBounds(280, 400, 103, 23);
+        chInstalacion.setBounds(280, 400, 83, 25);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("solicitud");
@@ -432,7 +421,7 @@ public class fsoporte extends javax.swing.JFrame {
         chCerrado.setFont(new java.awt.Font("Serif", 1, 12)); // NOI18N
         chCerrado.setText("Orden cerrada");
         jPanel3.add(chCerrado);
-        chCerrado.setBounds(140, 430, 120, 23);
+        chCerrado.setBounds(140, 430, 120, 25);
 
         textUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         textUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -459,7 +448,7 @@ public class fsoporte extends javax.swing.JFrame {
         analistaFind.setBounds(340, 360, 30, 30);
 
         jPanel3.add(cbBien);
-        cbBien.setBounds(140, 110, 180, 28);
+        cbBien.setBounds(140, 110, 180, 20);
 
         Ficha.addTab("FICHA DE REGISTRO", jPanel3);
 
@@ -876,15 +865,6 @@ public class fsoporte extends javax.swing.JFrame {
             Ficha.setSelectedIndex(0);
         }//GEN-LAST:event_btoncancelarActionPerformed
 
-        private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-            if (swe == 0) {
-                //permiso();
-                btonmodificar.setEnabled(false);
-                btoneliminar.setEnabled(false);
-                btonaceptar.setEnabled(false);
-            }
-        }//GEN-LAST:event_formWindowActivated
-
     private void chInstalacionStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chInstalacionStateChanged
         if (chInstalacion.isSelected() == true) {
             textDessoporte.setEnabled(true);
@@ -916,14 +896,6 @@ public class fsoporte extends javax.swing.JFrame {
         }
         cliente = new ClienteView(this, 'A', codigo);
     }//GEN-LAST:event_analistaFindActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        cliente.exit();
-    }//GEN-LAST:event_formWindowClosed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        cliente.exit();
-    }//GEN-LAST:event_formWindowClosing
 
     /*private void permiso() {
      btonaceptar.setEnabled(false);

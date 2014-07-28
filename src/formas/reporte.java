@@ -208,7 +208,8 @@ public class reporte extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btonrepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonrepoActionPerformed
-        Map paremeters = null;
+        Map paremeters = new HashMap();
+        paremeters.put("logo", getClass().getResourceAsStream("/imagenes/logohgs.jpg"));
         switch (tabla.getSelectedRow()) {
             case 0:
                 
@@ -217,14 +218,12 @@ public class reporte extends javax.swing.JFrame {
                 
                 break;
             case 2:
-                
+                print(getClass().getResource("/reporte/ListadoEquiposPendientes.jasper"), paremeters);
                 break;
             case 3:
-                
+                print(getClass().getResource("/reporte/ListadoEquiposReparados.jasper"), paremeters);
                 break;
             case 4:
-                paremeters = new HashMap();
-                paremeters.put("logo", getClass().getResourceAsStream("/imagenes/logohgs.jpg"));
                 print(getClass().getResource("/reporte/ListadoEquipos.jasper"), paremeters);
                 break;
             default:
