@@ -5,11 +5,8 @@
  */
 package formas;
 
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
